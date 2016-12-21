@@ -1,0 +1,32 @@
+*{
+    margin:0;
+    padding:0;
+}
+li{
+    list-style: none;
+}
+
+div{
+    padding:20px;
+}
+img{
+    width:80px;
+    height:80px;
+}
+.content{
+    background-color:#eee;
+    border:1px solid #999;
+    overflow:hidden;
+}
+.main{
+    width:100%;
+    float:left;
+}
+.sub{
+    width:200px;
+    float:left;
+}
+.extra{
+    width:120px;
+    float:right;
+}
