@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ife2016Spring task8_2</title>
+    <link rel="stylesheet" href="./css/task8_1.css">
+</head>
+<body>
+    <p>实现类似bootstrap的响应式网格布局</p>
+    <p>为了实现不同列之间的间隔，有两种方法，一种是在每一列的内部加一个inner的div</p>
+    <p>另外一种可以在css中加入计算表达式calc，但是这么做影响性能，不建议</p>
+
+    <div class="main">
+        <div class="row">
+            <div class="outter col-md-4 col-sm-6">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-4 col-sm-6">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-4 col-sm-12">
+                <div class="inner"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="outter col-md-3 col-sm-3">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-6 col-sm-6">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-3 col-sm-3">
+                <div class="inner"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="outter col-md-1 col-sm-2">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-1 col-sm-2">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-2 col-sm-8">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-2 col-sm-3">
+                <div class="inner"></div>
+            </div>
+            <div class="outter col-md-6 col-sm-3">
+                <div class="inner"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
