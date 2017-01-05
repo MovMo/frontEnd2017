@@ -1,0 +1,620 @@
+ 
+/*公共样式区域*/
+/*定义颜色信息*/
+.bg-blue{
+    background:#2189BF;
+}
+.bg-yellow{
+    background: #e2cd47;
+}
+.bg-red{
+    background: #cf4a36;
+}
+.bg-green{
+    background:  #43b29e;
+}
+.bl-blue{
+    border-left: 3px solid #2189BF;
+}
+.bl-yellow{
+    border-left:3px solid #e2cd47;
+}
+.bl-red{
+    border-left:3px solid #cf4a36;
+}
+.bl-green{
+    border-left:3px solid #43b29e;
+}
+
+
+.mgTop20{
+    margin-top:20px;
+}
+.mgTop10{
+    margin-top:10px;
+}
+ 
+.mgTop5{
+    margin-top:5px;
+}
+.bgwhite{
+    background-color: #fff;
+}
+.test{
+    height:100px;
+    background:white;
+}
+.colorGray{
+    color:#b0b0b0;
+}
+.right20{
+    right:20%;
+}
+.right30{
+    right:30%;
+}
+.right40{
+    right:40%;
+}
+.right50{
+    right: 50%;
+}
+.right60{
+    right:60%;
+}
+/*特定于各个部分的布局*/
+body{
+    font-family: 'Microsoft YaHei',sans-serif;
+    font-size:14px;
+}
+header{
+    height:50px;
+    line-height:50px;
+}
+.main{
+    width:1275px;
+    margin:0 auto;
+    overflow: hidden;
+}
+aside{
+    background:#2B2E3D;
+    width:260px;
+    padding-bottom: 800px;
+    margin-bottom: -800px;
+    float:left;
+}
+.content{
+    background:#EDEDED;
+    padding:0 0 50px 0;
+    background: #ededed;
+
+}
+.crub{   
+    background: white;
+    padding-left:30px ;
+    color:#b0b0b0;
+    overflow: hidden;
+}
+.crub a{
+    display:block;
+    padding:10px 5px;    
+    color:#b0b0b0;
+}
+.crub li:not(:first-child)>a:before{
+    content:"/ ";
+}
+.crub li:last-child>a{
+    color:#2189BF;
+}
+.crub li{
+    float:left;
+}
+.content-wrapper{
+    padding-left:260px;     
+}
+.item-wrapper{         
+    width:890px;
+    margin-left:auto;
+    margin-right:auto;
+ 
+} 
+
+ 
+/*实现面板公共组件*/
+ 
+ .panel{
+    border:1px solid #d0d2d6;
+    border-radius: 6px;
+
+ }
+.panel-title{
+    background:#f4f5f6;
+    padding:10px 20px;     
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.panel-content{
+   background:white;  
+   border-bottom-right-radius: 6px;
+   border-bottom-left-radius:6px;  
+   padding-top:20px;
+   padding-bottom: 20px
+}
+.project-panel{
+    width:530px;
+}
+.projectDetail-panel{
+    width:350px;
+}
+.calendar-panel{
+    width:350px;
+}
+.rank-panel{
+    width: 530px;
+}
+
+/*头部导航栏布局*/
+header{
+    height:55px;
+    line-height: 55px;    
+    padding:10px 50px;
+    overflow: hidden;
+}
+.search-wrapper{
+    height:30px;
+    line-height: 30px;
+    margin-bottom:6px;
+}
+.search-wrapper input{
+    width:310px;
+    height:30px;    
+    padding: 5px 35px;
+    background: white url(../images/task9/search.png) no-repeat;
+    background-position: 15px 8px;
+    border-radius: 15px/15px;
+    font-size:16px;
+    margin-right:15px;
+}
+.search-wrapper img{
+    vertical-align: middle;
+    margin-right:3px;
+}
+.search-wrapper span{
+    color:white;
+    font-size:10px;
+}
+
+/*侧边栏上方的布局*/
+.profile-wrapper{
+    text-align: center;
+    margin-top:15px;
+}
+.profile-wrapper img{
+    vertical-align: middle;
+}
+.profile-wrapper span{
+    color:white;
+    margin-left:15px;
+}
+.info-wrapper{
+    color:#576477;
+    padding:20px 0;
+    text-align: center;
+    overflow: hidden; 
+
+}
+.info-wrapper>div{
+    display:inline-block;
+    padding:0 20px;
+    font-weight: 600;  
+
+}
+.info-wrapper>div.collect{
+    border-right:1px solid #313547;
+}
+ 
+ /*侧边栏menu的布局*/
+ 
+.menu-level1 li.active{
+    background: #393e4e;
+}
+
+ .menu-wrapper li.active>a{
+    color:white;
+ }
+ .menu-wrapper li>a{
+    display: block;
+    color:#67778b;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:13px;
+ }
+ .menu-level1>li>a{
+    padding-top:10px;
+    padding-left:60px;
+
+ }
+ li.report>a{
+    background:url(../images/task9/folder.png) no-repeat;  
+     background-position: 35px 10px; 
+ }
+ li.collect>a{
+    background:url(../images/task9/star.png) no-repeat;
+    background-position: 35px 10px;  
+ }
+ li.share>a{
+    background:url(../images/task9/share.png) no-repeat;  
+     background-position: 35px 10px; 
+ }
+ li.photos>a{
+    background:url(../images/task9/folder.png) no-repeat;
+    background-position: 35px 10px;  
+ }
+li.record>a{
+    background:url(../images/task9/star.png) no-repeat;
+    background-position: 35px 10px;  
+ }
+ .menu-level2 li>a{
+    padding-left:80px;
+ }
+ .menu-level2 span{
+    display: inline-block;
+    height:10px;
+    width:10px;
+    background:url(../images/task9/right-arrow.png) no-repeat;
+    margin-right:10px;
+ }
+  .menu-level2 li.active span{
+    background:url(../images/task9/down-arrow.png) no-repeat;    
+  }
+ .menu-level3 li>a{
+    padding-left:120px;
+    background:url(../images/task9/file.png) no-repeat;
+    background-position: 100px 10px;
+  
+ }
+
+
+/*右侧第一部分查询块的实现*/
+.query-form{
+    overflow: hidden;
+    color:#bcbcbc;
+    border:1px solid #dcdedf;
+
+}
+.query-form label{
+    font-size:10px;
+}
+.query-form .form-group{
+   float:left; 
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+/*基于ul实现里下拉菜单*/
+.myselect{
+    border:1px solid #cdcecf;
+    color:#111;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+    padding:3px;     
+    padding-right:15px;
+    margin-left:5px;
+    font-family: "微软雅黑";
+    font-size:12px;
+    background:url(../images/task9/select-down-arrow.png) no-repeat center right;
+}
+.query-form .first{
+    width:135px;
+    padding-left: 20px;
+    
+}
+.query-form .second{
+    width:240px;
+    padding-left:30px;
+    overflow: hidden;     
+    overflow:hidden;
+     
+}
+.query-form .second>div{
+    float:left;
+}
+.query-form .second .myselect{
+    width:120px;
+}
+
+.query-form .second .change{
+    background:url(../images/task9/change.png) no-repeat left center;
+    width:27px;
+    height:52px; 
+}
+
+.query-form .third{
+    width:300px;
+} 
+.third input{
+    width:120px;
+    padding:3px;
+}
+.third .myselect{
+    width:68px;
+}
+.third label:last-of-type{
+    margin-left:10px;
+}
+.query-form .first .myselect{
+    width:65px;
+}
+ 
+.query-form .forth{
+    width:190px;
+    padding-left:30px;
+    position: relative;
+    height:100%;
+    overflow: hidden;
+}
+.forth input{
+    -webkit-appearance: none;
+    padding:0 15px;
+    background: #388bc2;
+    border:none;
+    color:white;
+    height:25px;
+    line-height: 25px;
+    margin-top:15px;    
+}
+
+/*轮播部分的布局*/
+.carousel{
+    width:755px;
+    margin-right:5px; 
+}
+
+a.carousel-control{
+    display:block;
+    width:30px;
+    border:1px solid #cacdd0;
+    float:left;
+    text-align: center;
+    height:65px;
+    line-height:65px;
+    background: white;
+}
+a.carousel-control:first-child{
+    margin-right:5px;
+}
+.carousel-inner{
+    width:685px;
+    overflow: hidden;
+    float:left;
+    margin-right:5px; 
+}
+.carousel-inner>div{
+    width:805px;      
+    overflow: hidden;
+}
+.carousel-inner .item{
+    width:110px;
+    float:left;
+    border:1px solid #cacdd0;
+    margin-right:5px;
+    text-align: center;
+    height:65px;   
+    background: white; 
+}
+.carousel-inner .item.active{
+    border-top:3px solid #4388c9;
+}
+.carousel-inner .item .time{
+    font-size:10px;
+    padding-top:15px;
+}
+.carousel-inner .item .price{
+    font-size:10px;
+    color:#abaaaa;
+}
+.carousel-inner .price>span{
+    color:red;
+    font-size:16px;
+    font-weight: 900px;
+} 
+ 
+.history{
+    width:130px;
+    border:1px solid #cacdd0;
+    height:65px;
+    line-height: 65px;
+    padding-left:55px;
+    background:url(../images/task9/history.png) no-repeat 15px center #fff;
+}
+ 
+ /*四月份统计部分的布局*/
+ .static-wrapper>h4{
+    font-size:13px;
+    margin-bottom: 3px;
+    text-align: left;
+ }
+ .static-wrapper>div{
+    width:200px;
+    margin-right:30px;
+    border-top:1px solid #cacdd0;
+    border-bottom:1px solid #cacdd0;
+    border-right:1px solid #cacdd0;
+    float:left;
+    padding:12px 15px;
+    overflow: hidden;
+    background: white;
+    font-size:12px; 
+
+ }
+ .static-wrapper p{
+    font-size:12px;
+    line-height: 2;
+    vertical-align: bottom;
+ }
+ .static-wrapper>div:last-child{
+    margin-right: 0;
+ } 
+.static-wrapper .sqare{
+    width:58px;
+    height:45px;
+    float:right;    
+}
+/*标签栏的布局*/
+.project-panel .panel-content{
+    padding:10px 20px 25px 20px;
+}
+.tab-menu{
+    overflow: hidden;
+}
+.tab-menu a{
+    display: block;
+    padding:5px 20px;
+    background: #ececef;
+    margin-right:5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;   
+}
+.tab-menu a{
+    float:left;
+}
+.tab-menu li.active>a{
+    background: white;
+    border:1px solid #dadada;
+    margin-bottom:-1px;
+    
+}
+.tab-content{
+    width:100%;
+    border:1px solid #dadada;
+    border-radius: 0 5px 5px 5px;
+     margin-top:-1px; 
+}
+.tab-pane.active{  
+    display: block;
+}
+.tab-pane{
+    width:100%;
+    display: none;
+    text-align: center;
+}
+.cailiao-table{
+    margin:30px 35px;
+}
+.cailiao-table td{
+    border:1px solid #d3d3d3;
+    padding:8px 15px;
+}
+.cailiao-table td.active{
+    background: #d3d3d3;
+
+}
+
+/*项目详情部分的布局*/
+.projectDetail .label{
+    font-size:12px;
+    color:#cccbcb;
+    line-height:1.5;
+}
+.projectDetail .desc{
+    line-height:1.5;
+    margin-bottom:5px;
+}
+.projectDetail{
+    margin:15px 35px 20px 35px;
+}
+.projectDetail>div{
+    border-bottom:1px solid #ededf0;
+}
+.projectDetail>div:last-child{
+    border-bottom:none;
+    padding-top:5px;
+}
+.projectDetail p{
+    padding:0 15px;
+}
+.projectDetail .price{
+    border-right:1px solid #ededf0;
+    padding-right:40px;
+}
+.projectDetail .detail-desc{
+    min-height:120px;
+}
+button.primary{
+    color:white;
+    background: #388ac1;
+    padding:5px 15px;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+/*右侧最后一行的布局*/
+.calendar-panel .panel-content{
+    padding:10px 20px;
+    text-align: center;
+}
+.calendar-panel .heading{
+    margin-left:-5px;
+    padding-bottom:10px;
+}
+.calendar-panel .heading>*{
+    width:70px;  
+
+}
+.calendar-panel .heading>button{
+    padding:3px;
+    background: white;
+ 
+}
+.calendar-panel table{
+    width:100%; 
+}
+
+.calendar-panel thead{
+    padding:10px 0;
+    border-top:2px solid #d9eaf7;
+    border-bottom:1px solid #dadada; 
+}
+
+.calendar-panel td{
+    padding:5px;
+    
+    margin:2px;
+    
+    font-size: 12px;
+}
+.calendar-panel td.mark{
+    border:1px solid #f5ca39;
+}
+.rank-panel .panel-content{
+    padding:10px 25px;
+}
+.rank-panel table {
+    width: 100%;
+    text-align: center;
+}
+.rank-panel td {
+    border: 1px solid #dadada;
+    padding: 3px 0;
+}
+.rank-panel tr>td:last-child {
+    width: 65%;
+}
+.rank-panel span.outter {
+    display: inline-block;
+    width: 60%;
+    height: 5px;
+    background: #dadada;
+    margin-left: 10px;
+    /* vertical-align: middle; */
+    text-align: left;
+    position:relative;
+}
+.rank-panel span.inner {
+    position:absolute;
+    top:0;
+    left:0;     
+    bottom:0; 
+}
+ 
+
+

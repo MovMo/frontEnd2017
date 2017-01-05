@@ -1,0 +1,63 @@
+.task3{
+    overflow: hidden;
+    padding-left:200px;
+    padding-right:160px;
+}
+.task3 .main{
+    width:100%;
+    height:400px;
+    background: pink;
+    float:left; 
+ 
+}
+.task3 .sidebar{
+    width:200px;
+    height:250px;
+    float:left;
+    background: red;
+    margin-left:-100%;
+    position:relative;
+    left:-200px;
+}
+.task3 .extra{
+    width:160px;
+    height:300px;
+    float:left;
+    background: blue;
+    margin-left:-160px;
+    position:relative;
+    right:-160px;
+}
+
+.task4{
+    overflow: hidden;
+}
+.task4 *{
+    box-sizing: border-box;
+}
+.task4 .main-wrapper{
+    float:left; 
+    width:100%;
+
+}
+.task4 .main{
+    height:400px;
+    background: pink;
+    margin-left:200px;
+    margin-right:160px;
+
+}
+.task4 .sidebar{
+    float:left;
+    margin-left:-100%;
+    width:200px;
+    height:300px;
+    background: red;
+}
+.task4 .extra{
+    float:left;
+    margin-left:-160px;
+    width:160px;
+    height:350px;
+    background: blue;
+}
