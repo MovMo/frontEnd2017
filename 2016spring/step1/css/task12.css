@@ -1,0 +1,105 @@
+hr{
+    margin-top:10px;
+    margin-bottom:20px;
+}
+.mytable{
+    border-spacing: 2px;
+    border-collapse: separate;
+    color:#000;
+    text-align: left;
+    background-color: #fff;
+}
+.mytable thead tr{
+    background-color: #000;
+    color:#fff;
+}
+
+.mytable tbody tr:nth-child(even){
+    background-color: #ccc;
+
+}
+.mytable tbody tr:nth-child(odd){
+    background-color: #fff;
+}
+.mytable tbody tr:nth-child(-n+3) {
+    color: red;
+}
+
+/*input*/
+.myinput{
+    width:150px;
+    height:25px;
+    border:1px solid #ccc;
+    transition:width 1s, border 1s;
+}
+
+.myinput:focus{
+    width:300px;
+    border:1px solid #79ABE8;    
+}
+/*carousel*/
+
+@keyframes slider{
+    from{
+        left:0;
+    }
+    25%{
+        left:-400px;
+    }
+    50%{
+        left:-800px;
+    }
+    75%{
+        left:-1200px;
+    }
+
+        
+}
+.carousel{
+    position: relative;
+    width:400px;
+    height:300px;
+    overflow: hidden;
+}
+.carousel-indicator{
+    position: absolute;
+    bottom: 0;
+    right:0;
+    overflow: hidden;
+}
+.carousel-indicator a{
+    display: block;
+    padding:10px;
+    background-color: rgba(255,255,255,.3);
+}
+.carousel-indicator li{
+    float:left;  
+    margin-right: 5px;
+}
+
+.carousel-inner ul{
+    width:300%;
+    height: 100%;
+    position:absolute;
+    top:0;
+    left:0;
+    animation:slider 4s linear alternate;
+ 
+}
+
+.carousel-inner .item{
+    width:400px;
+    height:300px;    
+    float:left;  
+ 
+}
+.carousel-inner .item:first-child,.carousel-inner .item:last-child{
+    background-color: pink;
+}
+.carousel-inner .item:nth-child(2){
+    background-color: green;
+}
+.carousel-inner .item:nth-child(3){
+    background-color: blue;
+}
+ 
