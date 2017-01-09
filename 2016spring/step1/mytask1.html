@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>创建等高列布局的八种方法</title>
+<style>
+*,*:after,*:before{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+.container{
+    width:960px;
+    margin:0 auto;
+    overflow: hidden;
+    border:1px solid #000;
+}
+.rightWrap{
+    overflow: hidden;
+    
+    position:relative;
+    background: blue;
+}
+.contentWrap{
+    overflow: hidden;
+
+    position:relative;
+    right:320px;
+    background:pink;
+}
+.leftWrap{
+    float:left;
+    overflow: hidden;
+    position: relative;
+    right:420px;
+    background: red;
+}
+.left{
+    float:left;
+    width:220px;
+    height:300px;
+    position:relative;
+    left:740px;
+}
+.right{
+    float:left;
+    width:320px;
+    height:350px;
+     position: relative;
+    left:740px;
+}
+.content{
+    float:left;
+    width:420px;
+    height:400px;
+ 
+    position:relative;
+    left:740px;
+}
+
+    
+</style>
+</head>
+<body>
+
+<h1>方法一</h1>
+<p>如果一个设计是固定宽度，那么实现多列等高相对容易。只要制作一张一张合适的背景图片，在多列的父元素中进行垂直铺放，从而达到一种假象(假的多列等高布局效果)</p>
+<ul>
+    <li>优点：实现方法简单，兼容性强</li>
+    <li>不适合非固定宽度的等高列布局</li>
+</ul>
+<hr>
+<h2>方法二</h2>
+<p>给容器div使用单独的背景色</p>
+<p>这种方法的html结构较为复杂，需要为每一列都添加对应的容器元素，为对应的容器元素设置背景色</p>
+<div class="container">
+    <div class="rightWrap">
+        <div class="contentWrap">
+                <div class="leftWrap">
+                <div class="left"></div>
+                <div class="content"></div>
+                <div class="right"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

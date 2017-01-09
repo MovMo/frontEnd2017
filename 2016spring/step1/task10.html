@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>flex布局</title>
+    <style>
+        *,*:before,*:after{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        .main-wrapper{
+            border:1px solid #ccc;
+            padding:20px;
+            display: flex;
+            flex-flow:row wrap;
+        }
+        .main-wrapper>div{
+            width:150px;
+            border:1px solid red;
+            margin-bottom: 20px;
+        }
+        div.first{
+            height:120px;
+        }
+        div.second{
+            height:100px;
+        }
+        div.third{
+            height:40px;
+        }
+        div.forth{
+            height:200px;
+            border:1px solid blue;
+        }
+    @media(min-width: 640px){
+        .main-wrapper{
+            justify-content:space-between;
+            align-items:center;        
+        }
+    }
+    @media(max-width:640px){
+        .main-wrapper{
+            align-items:flex-start;
+            justify-content:space-around;
+        }
+        div.forth{
+            order:-1;
+        }
+    }
+    
+
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+        <div class="forth"></div>
+    </div>
+
+</body>
+</html>
