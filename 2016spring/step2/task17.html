@@ -8,23 +8,21 @@
         width:80%;
         border:1px solid #ccc;
         margin:0 auto;    
-        height:500px;   
-        margin-top:20px;
-        overflow: hidden;
-        position:relative;
-
+        display: flex;
+        height:500px;
+        flex-flow:row no-wrap;
+        align-items:flex-end;
+        justify-content:space-around;
       }
       @keyframes rise{
         from{
-          height:0;
+          bottom:-500px;
         }to{
-          height:100%;
+          bottom:0;
         }
       }      
       .aqi-chart-wrap>div{
-        position:absolute;
-        bottom:0;
-        animation:rise 1s linear;
+        flex:1;
       }
 
     </style>

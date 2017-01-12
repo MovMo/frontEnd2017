@@ -161,9 +161,17 @@ var Queue={
 var queue=Object.create(Queue);
 queue.init();
 leftInBtn.addEventListener('click',function(){
+    if(!/\d{1,}/.test(input.value)){
+        alert('请输出数字！');
+        return;
+    }
     queue.leftIn(input.value);
 },false);
 rightInBtn.addEventListener('click',function(){
+    if(!/\d{1,}/.test(input.value)){
+        alert('请输出数字！');
+        return;
+    }
     queue.rightIn(input.value);
 },false);
 

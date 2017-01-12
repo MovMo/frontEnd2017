@@ -41,35 +41,34 @@ var aqiSourceData = {
   "厦门": randomBuildData(100),
   "沈阳": randomBuildData(500)
 };
-//元素查找
-var citySelect=document.getElementById('city-select'),
-    graTime=document.getElementsByName('gra-time'),
-    radioGroup=document.getElementById('radio-group'),
-    chartWrap=document.getElementById('chart-wrap');
- 
+function getById(id){
+  return document.getElementById(id);
+}
+var citySelect=getById('city-select'),
+    radioGroup=getById('radio-group'),
+    radios=document.getElementsByName('gra-time'),
+    regDate=/(\d{4})\-(\d{2})\-(\d{2})/,
+    chartWrap=getById('chart-wrap');
 
 // 用于渲染图表的数据
 var chartData = {};
 
 // 记录当前页面的表单选项
 var pageState = {
-  nowSelectCity: '北京',
+  nowSelectCity: 0,
   nowGraTime: "day"
-}
+};
+var cityMap={};
 
 /**
  * 渲染图表
  */
 function renderChart() {
-  //图形绘制
-  var allWidth,singleWidth,constr='',curColor,index=0;
-  allWidth=parseInt(window.getComputedStyle(chartWrap,false).width,10);
-  singleWidth=Math.floor(allWidth/Object.keys(chartData).length);
-  for(var item in chartData){
-    curColor=Math.floor(Math.random()*0xFFFFF);
-    console.log('width:'+singleWidth+'px;height:'+chartData[item]+'px;background:#'+curColor+';left='+index*singleWidth+'px');
-    constr+='<div style="width:'+singleWidth+'px;height:'+chartData[item]+'px;background:#'+curColor+';left:'+index*singleWidth+'px"></div>'
-    index++;
+  var key,color;
+  constr='';
+  for(key in chartData){
+    color=Math.floor(Math.random()*0xFFFFF);
+    constr+='<div title='+chartData[key]+' style="height:'+chartData[key]+'px; background-color:#'+color+'"></div>'
   }
   chartWrap.innerHTML=constr;
 
@@ -79,26 +78,15 @@ function renderChart() {
  * 日、周、月的radio事件点击时的处理函数
  */
 function graTimeChange() {
-  //获取单选按钮组的值
-  var len=graTime.length,timeCheck;
-  while(len--){
- 
-    if(graTime[len].checked){
-      timeCheck=graTime[len].value;
-      break;
-    }
-    
-  }
-  // 确定是否选项发生了变化
-  
-  if(pageState.nowGraTime===timeCheck){
+  // 确定是否选项发生了变化 
+  if(this.value===pageState.nowGraTime){
     return;
   }
-  pageState.nowGraTime=timeCheck;
   // 设置对应数据
+  pageState.nowGraTime=this.value;
   initAqiChartData();
   // 调用图表渲染函数
-  renderChart();  
+  renderChart();
 }
 
 /**
@@ -106,8 +94,8 @@ function graTimeChange() {
  */
 function citySelectChange() {
   // 确定是否选项发生了变化 
-  if(pageState.nowSelectCity===this.value){
-    return;
+  if(this.value===pageState.nowSelectCity){
+    return ;
   }
   pageState.nowSelectCity=this.value;
   // 设置对应数据
@@ -120,10 +108,9 @@ function citySelectChange() {
  * 初始化日、周、月的radio事件，当点击时，调用函数graTimeChange
  */
 function initGraTimeForm() {
-  //采用事件委托
   radioGroup.addEventListener('click',function(e){
     if(e.target.getAttribute('type')==='radio'){
-      graTimeChange.call(graTime,e);
+      graTimeChange.call(e.target,e);
     }
   },false);
 }
@@ -132,16 +119,15 @@ function initGraTimeForm() {
  * 初始化城市Select下拉选择框中的选项
  */
 function initCitySelector() {
+  var index=0,
+      constr='';
   // 读取aqiSourceData中的城市，然后设置id为city-select的下拉列表中的选项
-  citySelect.innerHTML='';
-  var constr='',i=0;
-  citySelect.innerHTML='';
   for(var city in aqiSourceData){
-    constr+='<option value='+city+'>'+city+'</option>';
-    i++;
+    cityMap[index]=city;
+    constr+='<option value='+index+'>'+city+'</option>'
+    index++;
   }
   citySelect.innerHTML=constr;
-
   // 给select设置事件，当选项发生变化时调用函数citySelectChange
   citySelect.addEventListener('change',function(e){
     citySelectChange.call(this,e);
@@ -149,84 +135,82 @@ function initCitySelector() {
 
 }
 
- 
 /**
  * 初始化图表需要的数据格式
  */
+
+
 function initAqiChartData() {
-/*
-  var pageState = {
-    nowSelectCity: 0,
-    nowGraTime: "day"
-  }
- */
- var date=new Date(),
-    cityData={},
-    week=1,
-    sum=0,
-    dayNum=0,
-    month=1,
-    reg=/(\d{4})\-(\d{2})-(\d{2})/,
-    tmp,
-    next;
- chartData={};
- cityData=aqiSourceData[pageState.nowSelectCity];
- switch(pageState.nowGraTime){
-  case 'day':
-    for(var item in cityData){
-      chartData[item]=cityData[item];
-    }
-  break;
-  case 'week':
-    for(var item in cityData){
-      tmp=item.match(reg);
-      date.setFullYear(tmp[1]);
-      date.setMonth((+tmp[2])-1);
-      date.setDate(+tmp[3]);  
-      if(date.getDay()===0){
-        chartData[week++]=Math.floor(sum/dayNum);
-        sum=cityData[item];
-        dayNum=1;
-      }else{
-        sum+=+cityData[item];
-        dayNum++;        
+  // 将原始的源数据处理成图表需要的数据格式
+  // 处理好的数据存到 chartData 中
+  var cityData=aqiSourceData[cityMap[pageState.nowSelectCity]],
+      key,tmp,
+      sum=0,
+      dayNum=0,
+      week=1,
+      month=0,
+      date=new Date();
+  chartData={};
+  
+  switch(pageState.nowGraTime){
+    case 'day':
+      for(key in cityData){
+        chartData[key]=cityData[key];
       }
-      if(dayNum!=0){
-        chartData[week]=sum/dayNum;
-      }      
-    }
-  break;
-  case 'month':
-    cityData['2016-04-01']=0;
-    for(var item in cityData){
-      tmp=item.match(reg);
-      date.setFullYear(tmp[1]);
-      date.setMonth((+tmp[2])-1);
-      date.setDate(+tmp[3]);
-      //每月的第一天
-      if(date.getDate()===1&&date.getMonth()!==0){
-        chartData[month++]=Math.floor(sum/dayNum);
-        sum=cityData[item];
-        dayNum=1;
-      }else{
-        sum+=cityData[item];
+    break;
+    case 'week':
+      for(key in cityData){
+        tmp=key.match(regDate);
+        date.setFullYear(+tmp[1]);
+        date.setMonth(+tmp[2]);
+        date.setDate(+tmp[3]);
+        sum+=cityData[key];
         dayNum++;
+        if(date.getDay()===6){
+          chartData['第'+week+'周']=Math.floor(sum/dayNum);
+          week++;
+          sum=0;
+          dayNum=0;
+        }
+        if(dayNum!==0){
+          chartData['第'+week+'周']=Math.floor(sum/dayNum);
+        }
       }
-    }
-    delete cityData[2016-04-01];
-  break;
- }
- console.log('chartDate:',chartData);
+    break;
+    case 'month':
+      for(key in cityData){
+        tmp=key.match(regDate);
+        date.setFullYear(+tmp[1]);
+        date.setMonth(+tmp[2]-1);
+        date.setDate(+tmp[3]);
+        sum+=cityData[key];
+        dayNum++;
+        if(date.getMonth()!==month){
+          chartData['第'+(month+1)+'月']=Math.floor(sum/dayNum);
+          sum=cityData[key];
+          dayNum=1;
+          month++;
+        }
+        if(dayNum!==0){
+          chartData['第'+(month+1)+'月']=Math.floor(sum/dayNum);
+        } 
+      }
+    break;
+  }
+  
+  console.log('chartData',chartData);
+
 }
+
 
 /**
  * 初始化函数
  */
 function init() {
-  initGraTimeForm()
+  initGraTimeForm();
   initCitySelector();
   initAqiChartData();
-  citySelect.dispatchEvent('change');
+  renderChart();
 }
 
 init();
