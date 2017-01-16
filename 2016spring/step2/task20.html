@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>task20</title>
+    <style>
+        #list{
+            margin:0;
+            padding:0;
+            list-style-type: none;
+            overflow: hidden;
+        }
+        #list>li{   
+            padding:5px 15px;
+            background: red;
+            color:white;
+            float:left;
+            margin-right: 10px;
+        }
+        #list>li>span.selected{
+            background:blue;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" id="text" cols="30" rows="10" placeholder="请输入字符并用不同的符号分割"></textarea>
+    <button id="insertBtn">插入</button>
+    <button id="queryBtn">查询</button>
+    <input type="text" placeholder="请输入关键字" id="keyWord"></input>
+    <ul id="list"></ul>
+    <script src="./js/task20.js"></script>
+</body>
+</html>
