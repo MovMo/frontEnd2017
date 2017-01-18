@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>step2|task21</title>
+    <style>
+        .mt15{
+            margin-top: 15px;
+        }
+        ul{
+            overflow: hidden;
+            padding:0;
+            margin:0;
+            list-style-type: none;
+        }
+        ul>li{
+            padding:5px 10px;            
+            color:#fff;
+            float:left;
+            margin-right:10px;
+        }
+        ul>li.delete{
+            background-color: red;
+        }
+        .hobby-list>li{
+            background-color: orange;
+        }
+        .tag-list>li{
+            background-color: #87CDFF;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="tagInput"></label>
+        <input type="text" id="tagInput">
+    </div>
+    <div class="mt15">
+        <ul id="tag-list" class="tag-list">
+ 
+        </ul>
+    </div>
+    <div class="mt15">
+        <textarea name="" id="hobby" cols="30" rows="5" class="hobby"></textarea>
+    </div>
+    <div class="mt15"><button id="certain">确认兴趣爱好</button></div>
+        <div class="mt15">
+        <ul id="hobby-list" class="hobby-list">
+ 
+        </ul>
+    </div>
+    <script src="./js/task21.js"></script>
+</body>
+</html>
