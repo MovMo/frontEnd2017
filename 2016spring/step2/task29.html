@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务二十九</title>
+    <style>
+        .group{
+            padding:20px 0;
+            font-size:2rem; 
+
+            text-align: center;
+
+        }
+        input{
+            height:50px;
+            line-height: 50px;
+            width:450px;
+            border-radius: 5px;
+            margin:0 20px;            
+            -webkit-appearance: textfield;
+            border:2px solid #ccc;
+            vertical-align: middle;
+            font-size:1.5rem;
+            outline:0;
+        }
+        button{
+            height:50px;
+            line-height: 50px;
+            vertical-align: middle;
+            padding:0 20px;
+            background-color: #2F79BA;
+            color:#fff;
+            border:none;
+            border-radius: 5px;
+            font-size:1.5rem;
+
+        }
+        input.error{
+            border-color: red;
+        }
+        input.correct{
+            border-color: green;
+        }
+        div.msg{
+            font-size:1rem;
+            line-height: 1.2;
+            text-align: center;
+            display: none;
+        }
+        div.error{
+            color:red;
+            display: block;
+        }
+        div.correct{
+            color:green;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="my-form" name="my-form" method="post">
+        <div class="group">
+            <label for="">名称</label>
+            <input type="text" id="username" name="username" >
+            <button type="submit">验证</button>
+            <div id="msg" class="msg">输入值不能为空</div>
+        </div>
+    </form>
+    <script src="./js/task29.js"></script>
+</body>
+</html>
