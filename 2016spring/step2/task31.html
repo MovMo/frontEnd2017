@@ -1,0 +1,56 @@
+<!doctype html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>task31</title>
+       <style>
+       body{
+        padding-top:50px;
+       }
+ 
+        .input-group{
+            text-align: center;
+        }
+        .tab{
+            padding:15px;
+
+        }
+        label{
+            margin-right: 20px;
+        }
+        input[type=text]{
+            height:30px;
+            line-height: 30px;
+            border:2px solid #ccc;
+            border-radius: 5px;
+            width:300px;
+        }
+        select{
+            height:25px;
+            line-height: 25px;
+            width:150px;
+            margin-right:15px;
+        }
+       </style>
+   </head>
+   <body>
+       <form action="" method="post" id="myForm">
+           <div class="input-group" id="radio-wrapper">
+               <label for=""><input type="radio"  checked name="people" value="0">在校生</label>
+               <label for=""><input type="radio" name="people" value="1">非在校生</label>
+           </div>
+           <div class="input-group tab-wrapper" id="tab-wrapper">
+               <div class="tab tab-1">
+                   <label for="school">学校</label>
+                   <select name="" id="citySelect"></select>
+                   <select name="" id="schoolSelect"></select>
+               </div>
+               <div class="tab tab-2" style="display:none">
+                   <label for="">就业单位</label>
+                   <input type="text" id="company" name="company">
+               </div>
+           </div>
+       </form>
+       <script src="./js/task31.js"></script>
+   </body>
+   </html>   
