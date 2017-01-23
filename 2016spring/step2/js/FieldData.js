@@ -1,0 +1,61 @@
+
+var FieldData={
+    init:function(data){
+        this.data=data;
+        this.dom=getById(data.id);
+        this.tipDom=data.tipDomId?getById(data.tipDomId):this.dom.nextElementSibling;
+        this.isPassed=false;  
+        //添加focus，blur事件
+        this.addEvent();  
+    },
+    addEvent:function(){
+        addHandler(this.dom,'focus',this.showTip.bind(this));
+        addHandler(this.dom,'blur',this.valid.bind(this));        
+    },
+    valid:function(){
+        var i,curRule,
+            len=this.data.rules.length,
+            strategy,
+            errorMsg,
+            args;
+        for(i=0;i<len;i++){
+            args=[this.dom.value];
+            curRule=this.data.rules[i];
+            strategy=curRule['rule'];
+            if(curRule['args']){
+                args=args.concat(curRule['args']);
+            }
+            args.push(curRule['errorMsg']);
+            if((errorMsg=Validator[strategy].apply(null,args))!=null){
+                //显示错误信息
+                this.isPassed=false;
+                this.showError(errorMsg);
+                return errorMsg;
+            }
+        }
+        this.isPassed=true;
+        this.showCorrect();
+    },
+    showError:function(errorMsg){
+        this.tipDom.innerHTML=errorMsg;
+        removeClass(this.tipDom,'correct');
+        removeClass(this.dom,'correct');
+        addClass(this.tipDom,'error');
+        addClass(this.dom,'error');
+    },
+    showCorrect:function(){
+        this.tipDom.innerHTML=this.data.correctMsg;
+        removeClass(this.tipDom,'error');
+        removeClass(this.dom,'error');
+        addClass(this.tipDom,'correct');
+        addClass(this.dom,'correct');
+    },
+    showTip:function(){
+        this.tipDom.innerHTML=this.data.tipMsg;
+        removeClass(this.tipDom,'error');
+        removeClass(this.dom,'error');
+        removeClass(this.tipDom,'correct');
+        removeClass(this.dom,'correct');       
+    }
+
+};

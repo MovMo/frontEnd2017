@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task30_2</title>
+    <style>
+    *{
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
+    }
+        .f-right{
+            float:right;
+        }
+        .form-wrapper{
+            padding:50px 0;
+        }
+        .input-group{
+            width:400px;
+            margin:0 auto;
+            position: relative;
+            padding:5px 0;
+           
+        }
+        .input-group>input{
+            width:100%;
+            height:30px;
+            line-height: 30px;
+            border-radius: 5px;
+            outline:none;
+            border:2px solid #ccc;
+        }
+        .input-group>label{
+            position: absolute;
+            text-align: right;
+            width:200px;
+            left:-220px;
+        }
+        .input-group>span{
+           font-size:.9em;
+           color:#999;            
+        }
+        .style1 .input-group>span{
+           display: block;
+           padding-top:5px;
+
+        }
+        .style1 .input-group{
+            width:500px;
+        }
+        .style2 .input-group{
+            width:400px;
+        }
+        .style2 .input-group>span{
+            position:absolute;
+            width:200px;
+            right:-220px;
+            top:0;
+            padding-top:15px;
+        }
+        .input-group input.correct {
+            border:2px solid #5EBB48;
+        }
+        .input-group span.correct{
+            color:#5EBB48;
+        }
+        .input-group input.error{
+            border:2px solid red;
+        }
+        .input-group span.error{
+            color:red;
+        }
+        .btn{
+            border:none;
+            border-radius: 5px;
+            padding:5px 20px;
+            font-size:1.1em;            
+        }
+        .btn-primary{
+            color:#fff;
+            background-color: #2F79BA;            
+        }
+
+    </style>
+</head>
+<body>
+   <div class="form-wrapper">
+        <form action="" method="post" id="myForm" class="my-form style1">
+            <div class="input-group">
+                <label for="">名称</label>
+                <input type="text" name="username" id="username">
+                <span></span>
+            </div>
+            <div class="input-group">
+                <label for="">密码</label>
+                <input type="password" name="password" id="password">
+                <span></span>
+            </div>
+            <div class="input-group">
+                <label for="">密码确认</label>
+                <input type="password" id="passwordAgain" name="passwordAgain">
+                <span></span>
+            </div>
+            <div class="input-group">
+                <label for="">邮箱</label>
+                <input type="text" id="email" name="email">
+                <span></span>
+            </div>
+            <div class="input-group">
+                <label for="">手机</label>
+                <input type="text" name="phoneNum" id="phoneNum">
+                <span></span>
+            </div>
+            <div class="input-group">
+                <button type="submit" id="submitBtn" class="btn btn-primary f-right">提交</button>
+            </div>
+        </form>
+    </div> 
+    <script src="./js/common.js"></script>
+    <script src="./js/validator.js"></script>
+    <script src="./js/FieldData.js"></script>
+    <script src="./js/task32_2.js"></script>
+</body>
+</html>

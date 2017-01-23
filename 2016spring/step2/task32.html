@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task32|实现表单自动生成工厂</title>
+    <style>
+        .f-left{
+            float:left;
+        }
+        *{
+            margin:0;
+            padding:0;
+            border-box:box-sizing;
+        }
+        body{
+            font-family: "Microsoft Yahei";
+            font-size: 14px;
+            padding:20px;
+        }
+        .sidebar{
+            width:350px;
+            float:left;
+            overflow: hidden;
+        }
+        .main{
+            margin-left:370px;
+            overflow: hidden;
+ 
+        }
+        #ruleAdd{
+           padding:5px 20px;
+           color:#fff;
+           font-size: 16px;
+            background-color: #3B99FC;
+            border:none;
+            margin-left:25px;
+            border-radius: 5px;
+        }
+        fieldset{
+            margin:20px;
+            padding:10px;
+        }
+        .show{
+            border:1px solid #ccc;
+            border-radius: 8px;
+        }
+        .show h1{
+            color:#3B99FC;
+            text-align: center;
+            line-height: 1.5;
+
+        }
+        .form-group{
+            padding:5px 0;
+        }
+        label{
+            margin-right:10px;
+        }
+        input.numText{
+            width:40px;
+        }
+        #options{
+            width:100%;
+        }
+        #optionList{
+            width:100%;
+            min-height:40px;
+            padding:20px;
+            text-align: center;
+        }
+        #optionList li{
+            padding:5px;
+            display: inline-block;
+            margin-right:5px;
+            background-color: red;
+            color:#fff;
+        }
+        /*自定义表格部分的布局*/
+        .my-form .input-group{
+          padding:15px 0;  
+          overflow: hidden;
+        }
+        .my-form input[type=text] {
+            border: 1px solid #ccc;
+            height: 25px;
+            line-height: 25px;
+            border-radius: 5px;
+            width:70%;
+        }
+        .my-form label{
+            width:20%;
+            text-align: right;
+            display: inline-block;
+            padding-right:20px;
+
+        }
+        span.tips{
+            color:#ccc;            
+        }
+         
+        .style1 span.tips{
+            display: block;
+            padding-left:23%;
+            margin:10px 0;
+        }
+        .style2 span.tips{
+            float:left;
+            width:30%;
+        }
+        .style2 .field-wrapper{
+            float:left;
+            width:70%;
+        }
+              
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <form action="" id="configForm">
+            <fieldset  >
+                <legend>类型</legend>
+                <div class="radio-group" id="typeRaidos">
+                    <label><input type="radio" name="type" value="text" checked>文本框</label>
+                    <label><input type="radio" name="type" value="radio">单选框</label>
+                    <label><input type="radio" name="type" value="checkbox">多选框</label>
+                    <label><input type="radio" name="type" value="select">下拉框</label>
+                    <label><input type="radio" name="type" value="textarea">文本域</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>配置</legend>
+                <div class="form-group"><label for="">标签:</label><input type="text" name="label" id="label" value="文本框"></div>
+                <div class="form-group">
+                    <div class="require-radios f-left" >
+                        <label for=""><input type="radio" checked name="isRequired" value="true">必填</label>
+                        <label for=""><input type="radio"  name="isRequired" value="false">选填</label>
+                    </div>
+                    <label for="">样式</label>
+                    <select name="style" id="style" >
+                        <option value="style1" name="style" >样式1</option>
+                        <option value="style2" name="style">样式2</option>
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset id="ruleField">
+                <legend>规则</legend>
+                <div id="ruleRadios">
+                    <label for="">
+                        <input type="radio" checked name="rule" value="text">文字</input>
+                        <input type="radio" name="rule" value="number">数字</input>
+                        <input type="radio" name="rule" value="email">邮箱</input>
+                        <input type="radio" name="rule" value="phonenum">电话号码</input>
+                        <input type="radio" name="rule" value="password">密码</input>
+                    </label>
+                </div>
+            </fieldset>
+            <fieldset id="lengthField">
+                <legend>长度限制</legend>
+                <div class="form-group">
+                    <label for="">长度范围：</label>
+                    <input type="text" name="min" class="numText">
+                    --
+                    <input type="text" name="max" class="numText">
+                </div>
+            </fieldset>
+            <fieldset id="optionField" style="display:none">
+                <legend>选项</legend>
+                <div class="form-group">
+                    <input type="text" id="options" placeholder="可用空格，逗号，回车来分割" name="options">
+                </div>
+                <ul id="optionList">
+                    
+                </ul>
+            </fieldset>
+            <input type="submit" id="ruleAdd" value="add">
+        </form>
+
+    </div>
+    <div class="main">
+        <div class="show">
+            <h1>表单展示区</h1>
+            <form action="#" id="myForm" class="my-form style1" method="post">
+                
+            </form>
+        </div>
+    </div>
+    <script src="./js/task32.js"></script>
+</body>
+</html>
