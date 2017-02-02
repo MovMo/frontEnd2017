@@ -27,7 +27,8 @@
             overflow: hidden;
  
         }
-        #ruleAdd{
+ 
+        .btn-primary{
            padding:5px 20px;
            color:#fff;
            font-size: 16px;
@@ -75,48 +76,76 @@
             background-color: red;
             color:#fff;
         }
-        /*自定义表格部分的布局*/
-        .my-form .input-group{
-          padding:15px 0;  
-          overflow: hidden;
+        #optionList li.delete{
+            background-color: blue;
+            color:#fff;
         }
-        .my-form input[type=text] {
-            border: 1px solid #ccc;
-            height: 25px;
-            line-height: 25px;
-            border-radius: 5px;
-            width:70%;
+
+        /*表单部分的布局*/
+        .my-form{
+            padding:15px 0;
         }
-        .my-form label{
-            width:20%;
-            text-align: right;
-            display: inline-block;
-            padding-right:20px;
+        .input-group{
+            width:450px;
+            position:relative;
+            margin:0 auto;
+            padding:5px 0;
+ 
+            vertical-align: middle;
 
         }
-        span.tips{
-            color:#ccc;            
+        .input-group input[type="text"]{
+            width:100%;
+            border:2px solid #ccc;
+            border-radius: 5px;
+            height:30px;
+            line-height: 30px;
+        }
+        .input-group>.label{
+            position: absolute;
+            width:150px;
+            left:-170px;            
+            text-align: right;
+            height:30px;
+            line-height: 30px;
+            top:0;
+        }
+        .input-group span{
+            font-size:.9em;
+            color:#999;
         }
          
-        .style1 span.tips{
+        .input-group.correct input{
+            border:2px solid #A6E22E;
+        }
+        .input-group.correct span{
+            color:#A6E22E;
+        }
+        .input-group.error input{
+            border:2px solid red;
+        }
+        .input-group.error span{
+            color:red;
+        }
+        .style1 .input-group{
+            width:350px;
+        }
+        .style1 span{
             display: block;
-            padding-left:23%;
-            margin:10px 0;
+            padding:5px 0;
         }
-        .style2 span.tips{
-            float:left;
-            width:30%;
-        }
-        .style2 .field-wrapper{
-            float:left;
-            width:70%;
+        .style2 span{
+            position: absolute;
+            width:200px;
+            right:-220px;
+            top:15px;
         }
               
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <form action="" id="configForm">
+        <form action="#" id="configForm" method="post">
             <fieldset  >
                 <legend>类型</legend>
                 <div class="radio-group" id="typeRaidos">
@@ -149,7 +178,7 @@
                         <input type="radio" checked name="rule" value="text">文字</input>
                         <input type="radio" name="rule" value="number">数字</input>
                         <input type="radio" name="rule" value="email">邮箱</input>
-                        <input type="radio" name="rule" value="phonenum">电话号码</input>
+                        <input type="radio" name="rule" value="phoneNum">电话号码</input>
                         <input type="radio" name="rule" value="password">密码</input>
                     </label>
                 </div>
@@ -158,12 +187,12 @@
                 <legend>长度限制</legend>
                 <div class="form-group">
                     <label for="">长度范围：</label>
-                    <input type="text" name="min" class="numText">
+                    <input type="text" name="minLength" class="numText">
                     --
-                    <input type="text" name="max" class="numText">
+                    <input type="text" name="maxLength" class="numText">
                 </div>
             </fieldset>
-            <fieldset id="optionField" style="display:none">
+            <fieldset id="optionField" style="display:none" disabled >
                 <legend>选项</legend>
                 <div class="form-group">
                     <input type="text" id="options" placeholder="可用空格，逗号，回车来分割" name="options">
@@ -171,8 +200,10 @@
                 <ul id="optionList">
                     
                 </ul>
+                <input type="hidden" name="optionResult" id="optionResult" value=''>
             </fieldset>
-            <input type="submit" id="ruleAdd" value="add">
+            <button type="submit" id="ruleAdd" class="btn-primary">add</button>
+
         </form>
 
     </div>
@@ -180,10 +211,20 @@
         <div class="show">
             <h1>表单展示区</h1>
             <form action="#" id="myForm" class="my-form style1" method="post">
-                
+              <!--  <div class="input-group">
+                    <label for="">名称</label>
+                    <input type="text" id="username">
+                    <span >必填，4-16个字符</span>
+                </div>-->
+                <div class="input-group">
+                    <button type="submit" id="submitBtn"  class="btn-primary" style="display:none">提交</button>
+                </div>
             </form>
         </div>
     </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/TagModule.js"></script>
+    <script src="./js/FieldModule.js"></script>
     <script src="./js/task32.js"></script>
 </body>
 </html>

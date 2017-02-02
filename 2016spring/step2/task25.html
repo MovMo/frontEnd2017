@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task25|javascript树形组件</title>
+    <style>
+        body{
+            padding-top:50px;
+        }
+        *{
+            padding:0;
+            margin:0;
+        }
+        ul{
+            list-style: none;
+        }
+        .clearfix,.clearfix:after,.clearfix:before{
+            content:'';
+            display: table;
+            clear:both;
+        }
+        
+
+
+        .main{
+            padding-top:20px;
+            width:350px;
+            margin:0 auto;
+            border:1px solid #ccc;
+        }
+        .tree-menu{
+            margin-top:20px;
+            padding:0 20px;
+        }
+
+        .right-arrow{
+            width:0;
+            height:0;
+            border-top:5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left:10px solid #6898C2;            
+            display:inline-block;
+            margin-right:5px;
+            margin-left:-10px;
+
+        }
+        .down-arrow{
+            width:0;
+            height:0;
+            border-left:5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top:10px solid #6898c2;            
+            display:inline-block;
+            margin-right:5px;
+            margin-left:-10px;
+            
+        }
+        .empty-arrow{
+            width:10px;
+            height:10px;
+            display: inline-block;
+            border:none;
+        }
+        .search-wrapper{
+            text-align: center;
+        }
+        .operate{
+            display: inline-block;
+            margin-left:40px;
+            visibility: hidden;
+        }
+        .operate>span{
+            display: inline-block;
+            width:20px;
+            height:20px;
+        }
+        .menu ul{
+            padding-left:30px;
+        }
+        .menu li{
+            padding:5px 0;
+            font-size:14px;
+            color:#6898C2;
+            cursor:pointer;
+            
+        }
+        .menu li:hover{
+            color:blue;
+        }
+        span.add{            
+            background: url(./imgs/add.png) no-repeat 0 5px;
+        }
+        span.delete{
+            background: url(./imgs/delete.png) no-repeat  0 5px ;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="search-wrapper">
+            <input type="text" id="keyword">
+            <button id="query-btn">搜索</button>
+            <button id="clear-btn">清除</button>
+
+        </div>
+
+        <div class="tree-menu">
+            <ul id="menu" class="menu">
+                <li id="root"><i class="down-arrow"></i> 前端工程师  <div class="operate"><span class="add"></span><span class="delete"></span></div>
+                 <!--   <ul>
+                        <li><i class="down-arrow"></i>技术<div class="operate"><span class="add"></span><span class="delete"></span></div>
+                            <ul>
+                                <li>HTML5 <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                                <li>javascript <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                                <li>css3 <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                                <li>php <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                                <li><i class="down-arrow"></i>node.js                               
+                                 <div class="operate"><span class="add"></span><span class="delete"></span></div>
+                                <ul>
+                                    <li>javascript <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                                </ul>
+                                </li>
+                            </ul>
+                         </li>
+                        <li><i class="right-arrow"></i>互联网公司 <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                        <li><i class="right-arrow"></i>谈笑风声 <div class="operate"><span class="add"></span><span class="delete"></span></div></li>
+                    </ul>-->
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <script src="./js/task25.js"></script>
+</body>
+</html>
+ 
