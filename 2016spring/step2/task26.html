@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task26|行星与飞船</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        .clear-fix,.clear-fix:before,.clear-fix:after{
+            content:'';
+            display: table;
+            clear:both;
+        }
+        body{
+            font-family:'Microsoft Yahei';
+            font-size:12px;
+            padding:10px 0;
+        }
+        @keyframes circle{
+            from{
+                transform:rotate(0deg);
+            }to{
+                transform:rotate(360deg);
+            }
+        }
+        ul{
+            list-style-type: none;
+        }
+        .main{
+            width:1100px;
+            margin:0 auto;
+            border:1px solid #000;
+            min-height: 700px;
+        }
+        .console{
+            width:300px;
+            overflow: scroll;
+            float:left; 
+            height:700px;         
+        }
+        .console h1{
+            text-align: center;
+            padding:10px 0;
+        }
+        .console-list li{
+            padding:2px 10px;
+            font-size:10px;
+        }
+        .game-panel{
+            margin-left:300px;            
+            width:800px;
+                  
+        }
+        .panel-pad{
+           background-color: #cecece;
+           width:100%;
+           height:600px; 
+           position: relative;
+        }
+        .planet{
+            width:200px;
+            height:200px;
+            border-radius: 50%;
+            background-image: url('./imgs/planet2.png');
+            background-size: 200px 200px;
+            background-repeat: no-repeat;
+            position: absolute;
+            top:50%;
+            left:50%;            
+            transform:translate(-50%, -50%);   
+             
+        }
+        .orbit{
+            border-radius: 50%;
+            border:1px dashed #999;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);            
+        }
+        .orbit1{
+            width:240px;
+            height:240px;
+        }
+        .orbit2{
+            width:320px;
+            height:320px;
+        }
+        .orbit3{
+            width:400px;
+            height: 400px;
+        }
+        .orbit4{
+            width:480px;
+            height:480px;
+        }
+         
+        .info-list li{
+            padding:3px 20px;
+        }
+        .info-list .info-bar{
+            width:120px;
+            height:4px;
+            display: block;
+            background-color: red;
+        }
+
+        .command-panel legend{
+            font-size:16px;
+        }
+        .command-list li{
+            padding:2px 15px;
+        }
+        .btn {
+            border: 1px solid #ccc;
+            padding: 2px 10px;
+            background: #fff;
+            border-radius: 3px;
+            color:#999;
+            cursor:pointer;
+        }
+        .btn:hover{
+            color:#000;
+
+        }
+
+        .airship{
+            width:50px;
+            height:50px;
+            background:url(./imgs/rocket-active.png) no-repeat;
+            background-size: 50px 50px;
+            position: absolute;
+            top:50%;
+            left:50%;
+            z-index:5;
+            display: none;
+            
+        }
+        .airship1{
+            margin-left:-145px;   
+            margin-top:-25px;           
+            /*animation:circle  1s infinite linear;*/
+            transform-origin:145px 25px;
+        }
+        .airship2{
+            margin-left:-185px;
+            margin-top:-25px;
+            transform-origin:185px 25px;
+            /*animation:circle  1s infinite linear;*/
+ 
+        }
+        .airship3{
+            margin-left:-225px;
+            margin-top:-25px;
+            transform-origin:225px 25px; 
+            /*animation:circle  1s infinite linear;*/
+        }
+        .airship4{
+            margin-left:-265px;
+            margin-top:-25px;
+            transform-origin:265px 25px;
+            /*animation:circle  1s infinite linear;*/
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main clear-fix">
+        <div class="console">
+            <h1>Conole Log</h1>
+            <ul class="console-list">
+                <li>飞船1起飞</li>
+                <li>飞船1起飞</li>
+            </ul>
+        </div>
+        <div class="game-panel">
+            <div class="panel-pad">
+                <ul class="info-list">
+                    <li>
+                        <p>飞船 No.1</p>
+                        <span class="info-bar"></span>
+                    </li>
+                    <li>
+                        <p>飞船 No.2</p>
+                        <span class="info-bar"></span>
+                    </li>
+                    <li>
+                        <p>飞船 No.3</p>
+                        <span class="info-bar"></span>
+                    </li>
+                    <li>
+                        <p>飞船 No.4</p>
+                        <span class="info-bar"></span>
+                    </li>
+                </ul>  
+                <div class="planet-wrapper"></div> 
+                <div class="orbit orbit1"></div>
+                <div class="orbit orbit2"></div>
+                <div class="orbit orbit3"></div>
+                <div class="orbit orbit4"></div>
+
+                <div class="planet"></div> 
+                <div class="airship airship1" id="airship1" ></div>
+                <div class="airship airship2" id="airship2" ></div>
+                <div class="airship airship3" id="airship3" ></div>
+                <div class="airship airship4" id="airship4" ></div>      
+                   
+            </div>
+
+            <div class="command-panel">
+                     <fieldset>
+                         <legend>控制台</legend>
+                         <ul class="command-list">
+                             <li>飞船1:
+                             <button class="btn">起飞</button>
+                             <button class="btn">飞行</button>
+                             <button class="btn">停止</button>
+                             <button class="btn">销毁</button>
+                             </li>
+                             <li>飞船2:
+                             <button class="btn">起飞</button>
+                             <button class="btn">飞行</button>
+                             <button class="btn">停止</button>
+                             <button class="btn">销毁</button>
+                             </li>
+                             <li>飞船3:
+                             <button class="btn">起飞</button>
+                             <button class="btn">飞行</button>
+                             <button class="btn">停止</button>
+                             <button class="btn">销毁</button>
+                             </li>
+                             <li>飞船4:
+                             <button class="btn">起飞</button>
+                             <button class="btn">飞行</button>
+                             <button class="btn">停止</button>
+                             <button class="btn">销毁</button>
+                             </li>                            
+
+                        </ul>
+                     </fieldset>
+            </div>     
+
+        </div>
+    </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/task26.js"></script>
+    
+</body>
+</html>

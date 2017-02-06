@@ -61,3 +61,7 @@ function serialize(form){
     //console.log(JSON.stringify(result));
     return JSON.stringify(result);
 }
+
+function getComputedStyle(elem,style){
+    return indow.getComputedStyle(elem,null).getPropertyValue(style);
+}
