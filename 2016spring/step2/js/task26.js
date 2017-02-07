@@ -1,6 +1,6 @@
 var FLYINGSPEED=10,
-    POWER_CHARGING_RATE=0.2,
-    POWER_CONSUMING_RATE=0.5,
+    POWER_CHARGING_RATE=0.02,
+    POWER_CONSUMING_RATE=0.05,
     ANIMINTERVAL=100,
     POWERBAR_WIDTH=120,
     POWERBAR_COLOR_GOOD='GREEN',
@@ -16,6 +16,7 @@ var logList=document.getElementById('logList');
 
 var AnimUtil={
     updatePower:function(powerBar,powerRate){
+        var id=powerBar.id.split('_')[1];
         powerBar.style.width=powerRate*POWERBAR_WIDTH+'px';
         if(powerRate<POWERBAR_RATE_BAD){
             powerBar.style.backgroundColor=POWERBAR_COLOR_BAD;
@@ -24,7 +25,7 @@ var AnimUtil={
         }else{
             powerBar.style.backgroundColor=POWERBAR_COLOR_GOOD;
         }
-        ConsoleUtil.log('当前电量：'+powerRate);
+        ConsoleUtil.log('airship'+id+'当前电量：'+powerRate);
     },
     updatePostion(dom,deg){
         dom.style.transform='rotate('+deg+'deg)'; 
@@ -40,6 +41,7 @@ var ConsoleUtil={
     }
 };
 
+//飞船的实现
 var Airship={
     init:function(domId){
         this.state='stop';
@@ -164,11 +166,60 @@ var Airship={
     }
  
 };
-
-//测试飞机的各项功能
-var airship1=Object.create(Airship);
-airship1.init('airship_1');
-
+var airships=[];
+for(var i=0;i<4;i++){
+    airships[i]=Object.create(Airship);
+    airships[i].init('airship_'+(i+1));
+}
  
+var Command={
+    init:function(commandObj){
+        this.airshipId=+commandObj.id;
+        this.airship=airships[this.airshipId-1];
+        this.commandText=commandObj.command;
+    },
+    execute:function(){
+         ConsoleUtil.log('airship'+this.airshipId+'开始执行'+this.commandText+'命令');
+        this.airship[this.commandText].apply(this.airship,null);
+       
+    }
+
+};
  
+//Mediator的实现
+var Mediator={
+    //信息传递有30%的失败率
+    //信息传递的延迟为1s
+    sendCommand:function(command){
+        var failed=Math.random()<0.3?true:false,
+            timer;
+        if(failed){
+            ConsoleUtil.log('airship'+command.airshipId+'的'+command.commandText+'命令下发失败');
+            return;
+        }
+        ConsoleUtil.log('airship'+command.airshipId+'的'+command.commandText+'命令下发成功');
+        
+        timer=setTimeout(function(){
+            command.execute();        
+        },1000);
+    }
+};
+
+var btnHandler=function(e){
+    //事件处理函数通过this绑定到事件发生的对象
+    var tmp=e.target.id.split('_'),
+        airshipId=tmp[1],
+        commandText=tmp[0],
+        myCommand=Object.create(Command);
+    myCommand.init({id:airshipId,command:commandText});
+    Mediator.sendCommand(myCommand);
+};
+
+//为控制台的按钮绑定处理事件,采用委托
+var commandPanel=document.getElementById('command_list');
+commandPanel.addEventListener('click',function(e){
+    if(e.target.nodeName.toLowerCase()==='button'){
+        btnHandler(e);
+    }
+});
 
