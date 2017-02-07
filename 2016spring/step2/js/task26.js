@@ -1,134 +1,174 @@
 var FLYINGSPEED=10,
-    CHARGINGRATE=0.0004,
-    ENERGYCONSUMPINGRATE=0.001,
+    POWER_CHARGING_RATE=0.2,
+    POWER_CONSUMING_RATE=0.5,
     ANIMINTERVAL=100,
     POWERBAR_WIDTH=120,
     POWERBAR_COLOR_GOOD='GREEN',
     POWERBAR_COLOR_MEDIUM='YELLOW',
     POWERBAR_COLOR_BAD='RED',
     POWERBAR_RATE_MEDIUM='0.7',
-    POWERBAR_RATE_BAD='0.3';
+    POWERBAR_RATE_BAD='0.3',
+    PLANET_RADIUS=105,
+    ORBIT_BETWEEN_SPACE=40,
+    AIRSHIP_HEIGHT=50;
+
+var logList=document.getElementById('logList');
 
 var AnimUtil={
     updatePower:function(powerBar,powerRate){
         powerBar.style.width=powerRate*POWERBAR_WIDTH+'px';
         if(powerRate<POWERBAR_RATE_BAD){
-            powerBar.style.background=POWERBAR_COLOR_BAD;
-        }else if(powerRate<POWERBAR_COLOR_MEDIUM){
-            powerBar.style.background=POWERBAR_RATE_MEDIUM;
+            powerBar.style.backgroundColor=POWERBAR_COLOR_BAD;
+        }else if(powerRate<POWERBAR_RATE_MEDIUM){
+            powerBar.style.backgroundColor=POWERBAR_COLOR_MEDIUM;
         }else{
-            powerBar.style.background=POWERBAR_COLOR_GOOD;
+            powerBar.style.backgroundColor=POWERBAR_COLOR_GOOD;
         }
+        ConsoleUtil.log('当前电量：'+powerRate);
+    },
+    updatePostion(dom,deg){
+        dom.style.transform='rotate('+deg+'deg)'; 
     }
 };
 
-
+var ConsoleUtil={
+    
+    log:function(text){
+        var li=document.createElement('li');
+        li.innerHTML=text;
+        logList.appendChild(li);
+    }
+};
 
 var Airship={
     init:function(domId){
-        this.state='init';//飞机有四个状态：初始化，飞行，停止，销毁
-        //对应的dom元素
-        this.dom=document.getElementById(domId);
-        this.id=domId.split('_')[1];
+        this.state='stop';
+        this.dom=document.getElementById(domId);        
+        this.id=+domId.split('_')[1];
         this.powerBar=document.getElementById('infoBar_'+this.id);
-        //console.log(this.dom);
-        this.deg=0;//起始的飞行角度
-        this.renderTimer=null;//动画的计时器
-        this.chargeTimer=null;//太阳能充电的计时器
-        this.dischargeTimer=null;//消耗能量的计时器
-        this.power=1;//刚初始化的时候，能源为100%
-        this.factorySystem.create();
+        //飞行动画渲染的计时器
+        this.renderTimer=null;
+        //能源消耗的计时器
+        this.dischargeTimer=null;
+        //充电的计时器
+        this.chargeTimer=null;
+        this.deg=0;   
+        //初始电量
+        this.powerRate=1;
+        ConsoleUtil.log('飞船'+this.id+':init');     
     },
-    //能源系统，提供能源，并且在宇宙中通过太阳能充电
-    erergySystem:{
-        //每秒钟通过太阳能充电（每秒增加2%）
-        charge:function(){
-            var  self=this;
-            this.chargeTimer=setInterval(function(){                
-                self.power+=CHARGINGRATE;
-                if(self.power>=1){
-                    //clearInterval(self.chargeTimer);
-                    self.power=1;                    
-                }
-                AnimUtil.updatePower(self.powerBar,self.energy);                                
-
-            },20);
-        },
-        //飞行过程中按照一定的速率消耗能源（每秒钟消耗5%)
-        disCharge:function(){
-            var self=this;            
-            this.disChargeTimer=setInterval(function(){
-                self.power-=ENERGYCONSUMPINGRATE;
-                if(self.power<=0){
-                    //停止而非销毁
-                    self.dynamicSystem.stop();
-                    return;
-                }
-                AnimUtil.updatePower(self.powerBar,self.power);
-            },20);
+    //动力系统
+    //负责飞行动画的渲染
+    move:function(){        
+        var self=this;
+        this.renderTimer=setInterval(function(){
+            self.deg+=FLYINGSPEED;            
+            AnimUtil.updatePostion(self.dom,self.deg);
+            if(self.deg>=360){
+                self.deg=0;
+            }            
+        },100);
+         ConsoleUtil.log('飞船'+this.id+':move');   
+    },
+    stopMove:function(){
+        clearInterval(this.renderTimer);
+         ConsoleUtil.log('飞船'+this.id+':stopMove');   
+    },
+    //能源系统
+    charge:function(){
+        var self=this;
+        //每一秒钟增加2%
+        this.chargeTimer=setInterval(function(){
+            if(self.powerRate>=1){
+                //如果电量是满的，那么返回
+                return;
+            }
+            self.powerRate+=POWER_CHARGING_RATE;
+            if(self.powerRate>=1){
+                self.powerRate=1;
+            }
+            AnimUtil.updatePower(self.powerBar,self.powerRate);
+        },1000);
+        ConsoleUtil.log('飞船'+this.id+':charge');  
+    },
+    //
+    stopCharge:function(){
+        if(this.chargeTimer){
+            clearInterval(this.chargeTimer);                    
         }
+        ConsoleUtil.log('飞船'+this.id+':stopcharge');          
     },
-    //动力系统，可以完成飞行和停止飞行两个行为
-    dynamicSystem:{
-        fly:function(){ 
-             
-            var self=this;         
-            this.renderTimer=setInterval(function(){                
-                self.deg+=FLYINGSPEED;                              
-                self.dom.style['transform']='rotate('+self.deg+'deg)';               
-                if(self.deg>=360){
-                    self.deg=0;
-                }
-             
-            },ANIMINTERVAL);
-        },
-        stop:function(){           
-            clearInterval(this.renderTimer);
+    discharge:function(){
+        var self=this;
+        this.dischargeTimer=setInterval(function(){
+
+            self.powerRate-=POWER_CONSUMING_RATE;
+            if(self.powerRate<=0){
+                self.stop();
+                self.powerRate=0;                
+            } 
+            AnimUtil.updatePower(self.powerBar,self.powerRate);
+           
+        },1000);
+        ConsoleUtil.log('飞船'+this.id+':discharge');  
+    },
+    stopDischarge:function(){
+        if(this.dischargeTimer){
+            clearInterval(this.dischargeTimer);
+            this.dischargeTimer=null;
         }
+        ConsoleUtil.log('飞船'+this.id+':stopDischarge');          
     },
-     
-    
-    //信号接收处理系统
-    singalSystem:{},
-    //负责创建与销毁
-    factorySystem:{
-        create:function(){
-            this.dom.style.display='block';
-            this.powerBar.parentNode.style.display='block'; 
-            //一旦创建，只要不销毁，就一直在充电
-            this.energySystem.charge();  
-        },
-        destory:function(){
-            this.dom.style.display='none';
-            this.powerBar.parentNode.style.display='none';
-            clearInterval(self.chargeTimer);
-            clearInterval(self.dischargeTimer);
-        },
-    },
-    stateManager:{
-        var self=this,
-            state={
-            'fly':function(){
-                self.state='fly';                
-                self.energySystem.disCharge();
-                self.dynamicSystem.fly();
-            },
-            'stop':function(){
-                self.state='stop';
-                self.dynamicSystem.stop();
-            },
-            'destory':function(){
-                self.state='destory';
-                self.factorySystem.destory();
-            },
-        };
+    //信号接收系统
+    receiveMsg:function(){},
+    //自爆系统
+    destroyShip:function(){
+        this.dom.style.display='none';
+        this.powerBar.parentNode.style.display='none';
+        ConsoleUtil.log('飞船'+this.id+':destroyShip');  
+    }, 
 
+    create:function(){
+        this.state='create';
+        ConsoleUtil.log('飞船'+this.id+':create'); 
+        this.dom.style.display='block';
+        console.log((-AIRSHIP_HEIGHT)+'px');
+        console.log(-(PLANET_RADIUS+ORBIT_BETWEEN_SPACE*this.id)+'px');
+        this.dom.style.marginTop=(-AIRSHIP_HEIGHT/2)+'px';
+        this.dom.style.marginLeft=-(PLANET_RADIUS+ORBIT_BETWEEN_SPACE*this.id)+'px';
+        this.powerBar.parentNode.style.display='block';
+        //每一次新建，飞船都出现在原始位置
+        //开启充电装置，除非销毁，否则太阳能充电操作一直进行中
+        this.charge();        
+    }, 
+    fly:function(){
+        this.state='fly';
+        ConsoleUtil.log('飞船'+this.id+':fly'); 
+        this.move();
+        //耗电
+        this.discharge();        
+    }, 
+    stop:function(){
+        this.state='stop';
+        ConsoleUtil.log('飞船'+this.id+':stop'); 
+        this.stopMove();
+        //停止耗电
+        this.stopDischarge();        
     },
-
+    destroy:function(){
+        this.state='destroy';
+        ConsoleUtil.log('飞船'+this.id+': destroy'); 
+        this.destroyShip();
+        this.stopCharge();
+        this.stopDischarge();         
+    }
+ 
 };
 
-
-
+//测试飞机的各项功能
 var airship1=Object.create(Airship);
-airship1.init('airship1');
+airship1.init('airship_1');
+
  
+ 
+
