@@ -121,8 +121,7 @@ var Airship={
         }
         ConsoleUtil.log('飞船'+this.id+':stopDischarge');          
     },
-    //信号接收系统
-    receiveMsg:function(){},
+
     //自爆系统
     destroyShip:function(){
         this.dom.style.display='none';
@@ -133,9 +132,7 @@ var Airship={
     create:function(){
         this.state='create';
         ConsoleUtil.log('飞船'+this.id+':create'); 
-        this.dom.style.display='block';
-        console.log((-AIRSHIP_HEIGHT)+'px');
-        console.log(-(PLANET_RADIUS+ORBIT_BETWEEN_SPACE*this.id)+'px');
+        this.dom.style.display='block';         
         this.dom.style.marginTop=(-AIRSHIP_HEIGHT/2)+'px';
         this.dom.style.marginLeft=-(PLANET_RADIUS+ORBIT_BETWEEN_SPACE*this.id)+'px';
         this.powerBar.parentNode.style.display='block';
@@ -172,6 +169,7 @@ for(var i=0;i<4;i++){
     airships[i].init('airship_'+(i+1));
 }
  
+//采用命令模式，将命令封装成对象
 var Command={
     init:function(commandObj){
         this.airshipId=+commandObj.id;
@@ -179,9 +177,10 @@ var Command={
         this.commandText=commandObj.command;
     },
     execute:function(){
-         ConsoleUtil.log('airship'+this.airshipId+'开始执行'+this.commandText+'命令');
-        this.airship[this.commandText].apply(this.airship,null);
-       
+        if(this.airship.state!=this.commandText){
+            ConsoleUtil.log('airship'+this.airshipId+'开始执行'+this.commandText+'命令');         
+            this.airship[this.commandText].apply(this.airship,null);
+        }      
     }
 
 };

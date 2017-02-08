@@ -61,7 +61,19 @@ function serialize(form){
     //console.log(JSON.stringify(result));
     return JSON.stringify(result);
 }
-
+//获得计算后的css样式
 function getComputedStyle(elem,style){
     return indow.getComputedStyle(elem,null).getPropertyValue(style);
 }
+//获取单选按钮选中值
+function getCheckedRadioValue(name){
+    var radios=document.getElementsByName(name);
+    for(var i=0,len=radios.length;i<len;i++){
+        if(radios[i].checked){
+            return radios[i].value;
+        }
+    }
+}
+ 
+ 
+ 
