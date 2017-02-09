@@ -38,6 +38,8 @@
         .show-table{
             border-spacing: 0;
             border-collapse: collapse;
+            width:100%;
+            text-align: center;
 
         }
         .show-table td{
@@ -176,19 +178,67 @@
             transform-origin:265px 25px;
             /*animation:circle  1s infinite linear;*/
         }
+        .command-panel label{
+            margin-right:10px;
+        }
+
+        .command-item{
+            display:none;
+        }
 
     </style>
 </head>
 <body>
     <div class="main clear-fix">
         <div class="console">
+            <table class="show-table">
+                <thead>
+                    <tr>
+                        <td>飞船</td>
+                        <td>动力系统</td>
+                        <td>能源系统</td>
+                        <td>飞行状态</td>
+                        <td>剩余能耗</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="show_1">
+                        <td id="show-num-1">1号</td>
+                        <td id="show-dynamic-1">前进号</td>
+                        <td id="show-energy-1"></td>
+                        <td id="show-state-1"></td>
+                        <td id="show-power-1"></td>
+                    </tr>
+                    <tr id="show_2">
+                        <td id="show-num-2"></td>
+                        <td id="show-dynamic-2"></td>
+                        <td id="show-energy-2"></td>
+                        <td id="show-state-2"></td>
+                        <td id="show-power-2"></td>
+                    </tr>
+                    <tr id="show_3">
+                        <td id="show-num-3"></td>
+                        <td id="show-dynamic-3"></td>
+                        <td id="show-energy-3"></td>
+                        <td id="show-state-3"></td>
+                        <td id="show-power-3"></td>
+                    </tr>
+                    <tr id="show_4">
+                        <td id="show-num-4"></td>
+                        <td id="show-dynamic-4"></td>
+                        <td id="show-energy-4"></td>
+                        <td id="show-state-4"></td>
+                        <td id="show-power-4"></td>
+                    </tr>
+                </tbody>
+            </table>
             <h1>Conole Log</h1>
             <ul class="console-list" id="logList"> 
             </ul>
         </div>
         <div class="game-panel">
             <div class="panel-pad">
-                <ul class="info-list">
+                <!--<ul class="info-list">
                     <li>
                         <p>飞船 No.1</p>
                         <span class="info-bar" id="infoBar_1"></span>
@@ -205,7 +255,7 @@
                         <p>飞船 No.4</p>
                         <span class="info-bar" id="infoBar_4"></span>
                     </li>
-                </ul>  
+                </ul>  -->
                 <div class="planet-wrapper"></div> 
                 <div class="orbit orbit1"></div>
                 <div class="orbit orbit2"></div>
@@ -221,29 +271,57 @@
             </div>
 
             <div class="command-panel">
+                 <fieldset>
+                         <legend>系统选择</legend>
+                         <ul class="command-list" id="modalList" >
+                             <li>动力系统选择:                         
+                                 <label for="">
+                                     <input type="radio" checked name="dynamicModal" value="qianjin" >前进号(速率10deg，能耗5%/s)
+                                 </label>
+                                 <label for="">
+                                     <input type="radio" name="dynamicModal" value="benteng">奔腾号(速率15deg，能耗7%/s)
+                                 </label>
+                                 <label for="">
+                                     <input type="radio" name="dynamicModal" value="chaoyue">超越号(速率20deg，能耗9%/s)
+                                 </label>
+                             </li>
+                             <li>能源系统选择:
+                                 <label for="">
+                                     <input type="radio" name="energyModal" value="jinliang" checked>劲量型(补充能源速度2%/s)
+                                 </label>
+                                 <label for="">
+                                     <input type="radio" name="energyModal" value="guangneng">光能型(补充能源速度3%/s)
+                                 </label>
+                                 <label for="">
+                                     <input type="radio" name="energyModal" value="yongjiu">永久型(补充能源速度5%/s)
+                                 </label>                         
+                             </li>                                                
+                            <li><button id="createShip_btn">创建新飞船</button></li>
+                        </ul>
+                    </fieldset>
                      <fieldset>
                          <legend>控制台</legend>
                          <ul class="command-list" id="command_list">
-                             <li>飞船1:
-                             <button class="btn" id="create_1">起飞</button>
+                             <li id="commandPanel_1">飞船1:
+                             
                              <button class="btn" id="fly_1">飞行</button>
                              <button class="btn" id="stop_1">停止</button>
                              <button class="btn" id="destroy_1">销毁</button>
-                             </li>
+                             </li id="commandPanel_2">
                              <li>飞船2:
-                             <button class="btn" id="create_2">起飞</button>
+                              
                              <button class="btn" id="fly_2">飞行</button>
                              <button class="btn" id="stop_2">停止</button>
                              <button class="btn" id="destroy_2">销毁</button>
                              </li>
-                             <li>飞船3:
-                             <button class="btn" id="create_3">起飞</button>
+                             <li id="commandPanel_3">飞船3:
+                             
                              <button class="btn" id="fly_3">飞行</button>
                              <button class="btn" id="stop_3">停止</button>
                              <button class="btn" id="destroy_3">销毁</button>
                              </li>
-                             <li>飞船4:
-                             <button class="btn" id="create_4" >起飞</button>
+                             <li id="commandPanel_4">飞船4:
+                              
                              <button class="btn" id="fly_4">飞行</button>
                              <button class="btn" id="stop_4">停止</button>
                              <button class="btn" id="destroy_4">销毁</button>
@@ -256,7 +334,15 @@
         </div>
     </div>
     <script src="./js/common.js"></script>
-    <script src="./js/task26.js"></script>
-    
+     <script src="./js/task28-consoleutil.js"></script>
+    <script src="./js/task28-animutil.js"></script>
+    <script src="./js/task28-dynamicsystem.js"></script>
+    <script src="./js/task28-powersystem.js"></script>
+    <script src="./js/task28-msgsystem.js"></script>
+    <script src="./js/task28-bus.js"></script>
+    <script src="./js/task28-commander.js"></script>
+    <script src="./js/task28-airship.js"></script>
+    <script src="./js/task28-airshipfactory.js"></script>
+    <script src="./js/task28-app.js"></script>
 </body>
 </html>

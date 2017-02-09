@@ -135,9 +135,7 @@ var Airship={
         this.dom.style.display='block';         
         this.dom.style.marginTop=(-AIRSHIP_HEIGHT/2)+'px';
         this.dom.style.marginLeft=-(PLANET_RADIUS+ORBIT_BETWEEN_SPACE*this.id)+'px';
-        this.powerBar.parentNode.style.display='block';
-        //每一次新建，飞船都出现在原始位置
-        //开启充电装置，除非销毁，否则太阳能充电操作一直进行中
+        this.powerBar.parentNode.style.display='block'; 
         this.charge();        
     }, 
     fly:function(){
