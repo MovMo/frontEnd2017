@@ -17,39 +17,47 @@ var Airship=(function(){
             this.showDom=getById('show_'+id);
             this.commandPanel=getById('commandPanel_'+id);
             this.id=+id;
-            this.power=100;
+            //this.power=100;
             //信息系统
             this.msgSystem=Object.create(MsgSystem);
             this.msgSystem.init(this);
         },
         create:function(dynamicModal,powerModal){
-            //只有在初始化的条件下才能创建
+            //只有在初始化或者销毁之后再次利用的条件下才能创建
             
-            if(this.state!=='init'){
+            if(this.state!=='init'&&this.state!=='destroy'){
                 return;
             }
             ConsoleUtil.log('airship'+this.id+':create');
-            this.state='create';
-            //位置复原
-            this.shipDom.style.marginLeft=-(PLANET_RADIUS+this.id*ORBIT_SPACE)+'px';
-            this.shipDom.style.marginTop=-(AIRSHIP_WIDTH/2)+'px';
+                        //位置复原
+            this.power=100;
+            
+            //this.shipDom.style.marginLeft=-(PLANET_RADIUS+this.id*ORBIT_SPACE)+'px';
+            //this.shipDom.style.marginTop=-(AIRSHIP_WIDTH/2)+'px';           
             //呈现
             this.shipDom.style.display='block';
             this.showDom.style.display='block';
             this.commandPanel.style.display='block';
-            //开始充电
-            this.powerSystem.charge();
-                        //动力系统，负责飞行、停止以及飞行中的耗能
+            //动力系统，负责飞行、停止以及飞行中的耗能
             this.dynamicSystem=Object.create(DynamicSystem);
             this.dynamicSystem.init(this,dynamicModal);
+            this.dynamicSystem.deg=0;
+            this.shipDom.style.transform='rotate(0deg)';
             this.powerSystem=Object.create(PowerSystem);
             this.powerSystem.init(this,powerModal);
+            //开始充电
+            this.powerSystem.charge();
+
             //向bus注册
             Bus.registerShip(this);
+            //开始周期性的广播状态信息
+            this.msgSystem.periodicSend();
+            this.state='stop';
+
         },
         fly:function(){
-            //只有在初始化，或者停止的状态下才能飞行
-            if(this.state!=='create'&&!this.state!=='stop'){
+            //只有停止的状态下才能飞行
+            if(this.state!=='stop'){
                 return;
             }
             ConsoleUtil.log('airship'+this.id+':fly');
@@ -59,14 +67,14 @@ var Airship=(function(){
 
         },
         stop:function(){
-            //只有在飞行的条件下，才能停下
-            if(this.state!=='fly'){
+            //只有在飞行或者初始化的条件下，才能停下
+            if(this.state==='stop'){
                 return;
             }
-            ConsoleUtil.log('airship'+this.id+':stop');
-            this.state='stop';
+            ConsoleUtil.log('airship'+this.id+':stop');            
             this.dynamicSystem.stopMove();
             this.dynamicSystem.stopDischarge();
+            this.state='stop';
         },
         destroy:function(){
             //除了在已经销毁的条件下，其他任何情况都可以销毁
@@ -74,13 +82,17 @@ var Airship=(function(){
                 return;
             }
             ConsoleUtil.log('airship'+this.id+':destroy');
-            this.state='destroy';
+            
             this.powerSystem.stopCharge();
+            //停止飞行动作计时器和耗电计时器
+            this.stop();            
             this.shipDom.style.display='none';
             this.commandPanel.style.display='none';
+            //结束周期性广播
+            this.msgSystem.stopPeriodicSend();
             //从bus中删除
             Bus.removeShip(this);
-            //将这个对象置为空
+            this.state='destroy';           
             
         },
 

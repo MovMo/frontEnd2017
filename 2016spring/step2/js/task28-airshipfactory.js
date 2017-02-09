@@ -8,7 +8,8 @@ var AirshipFactory=(function(){
         for(var i=1;i<=4;i++){
             if(airships[i-1].state==='init'||airships[i-1].state==='destroy'){
                 airships[i-1].create(dynamicModal,powerModal);
-                return airshis[i-1];
+                ConsoleUtil.log('创建飞船'+i);
+                return airships[i-1];
             }
         }
     };

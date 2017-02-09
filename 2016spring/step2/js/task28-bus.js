@@ -19,7 +19,7 @@ var Bus=(function(){
                 }
             }
         },
-        publicMsg:function(bitMsg){         
+        publishMsg:function(bitMsg){         
 
              
             var timer=setTimeout(function(){
@@ -28,6 +28,7 @@ var Bus=(function(){
                     ConsoleUtil.log('广播信息'+bitMsg+'失败');
                 }else{
                     ConsoleUtil.log('广播信息'+bitMsg+'成功');
+                    //接收方可能是飞船，也可能是其他
                     for(var i=0,len=airships.length;i<len;i++){
                         var curMsgSystem=airships[i].msgSystem;
                         curMsgSystem.receiveMsg(curMsgSystem.bit2jsonAdapter(bitMsg));

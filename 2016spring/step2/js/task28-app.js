@@ -13,13 +13,13 @@
     getById('createShip_btn').addEventListener('click',function(e){
         var dynamicModal=getCheckedRadioValue('dynamicModal'),
             powerModal=getCheckedRadioValue('energyModal');
-        AirshipFactory.create(dynamicModal,powerModal);
+        AirshipFactory.createAirship(dynamicModal,powerModal);
 
     },false);
 
     //控制面板部分的事件绑定
     function btnHandler(e){
-        var tmp=e.target.split('_'),
+        var tmp=e.target.id.split('_'),
             id=tmp[1],
             command=tmp[0],
             commandText=JSON.stringify({'id':id,'command':command});

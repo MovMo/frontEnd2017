@@ -27,7 +27,7 @@ var PowerSystem=(function(){
         charge:function(){
             var self=this;
             this.chargeTimer=setInterval(function(){
-                self.airship.power+=this.powerChargingRate;
+                self.airship.power+=self.powerChargingRate;
                 if(self.airship.power>=100){
                     self.airship.power=100;
                 }
