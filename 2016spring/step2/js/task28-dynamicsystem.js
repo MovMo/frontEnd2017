@@ -77,6 +77,9 @@ var DynamicSystem=(function(){
                 this.renderTimer=null;                
             }
         }, 
+        getName:function(key){
+            return DynamicModals[key].name;
+        }
     };
     return DynamicSystem;
 })();

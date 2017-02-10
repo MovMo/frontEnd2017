@@ -36,7 +36,7 @@ var Airship=(function(){
             //this.shipDom.style.marginTop=-(AIRSHIP_WIDTH/2)+'px';           
             //呈现
             this.shipDom.style.display='block';
-            this.showDom.style.display='block';
+            this.showDom.style.display='table-row';
             this.commandPanel.style.display='block';
             //动力系统，负责飞行、停止以及飞行中的耗能
             this.dynamicSystem=Object.create(DynamicSystem);
@@ -47,7 +47,11 @@ var Airship=(function(){
             this.powerSystem.init(this,powerModal);
             //开始充电
             this.powerSystem.charge();
-
+            this.showDom.cells[1].innerHTML=this.dynamicSystem.getName(dynamicModal);
+            this.showDom.cells[2].innerHTML=this.powerSystem.getName(powerModal);
+            this.showDom.cells[0].innerHTML=this.id+'号';
+            this.showDom.cells[3].innerHTML='stop';
+            this.showDom.cells[4].innerHTML='100%';
             //向bus注册
             Bus.registerShip(this);
             //开始周期性的广播状态信息
@@ -86,8 +90,9 @@ var Airship=(function(){
             this.powerSystem.stopCharge();
             //停止飞行动作计时器和耗电计时器
             this.stop();            
-            this.shipDom.style.display='none';
+            this.showDom.style.display='none';
             this.commandPanel.style.display='none';
+            this.shipDom.style.display='none';
             //结束周期性广播
             this.msgSystem.stopPeriodicSend();
             //从bus中删除

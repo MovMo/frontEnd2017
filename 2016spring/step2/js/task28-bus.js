@@ -7,7 +7,8 @@ var Bus=(function(){
     };
     var failRate=0.1,
         passDuration=300,
-        airships=[];
+        airships=[],
+        screens=[];
     var Bus={         
         registerShip:function(airship){
             airships.push(airship);
@@ -19,8 +20,12 @@ var Bus=(function(){
                 }
             }
         },
+        //注册显示屏幕
+        registerScreen:function(screen){
+            screens.push(screen); 
+        },
         publishMsg:function(bitMsg){         
-
+            
              
             var timer=setTimeout(function(){
                 var isFailed=Math.random()<failRate?true:false;
@@ -31,21 +36,16 @@ var Bus=(function(){
                     //接收方可能是飞船，也可能是其他
                     for(var i=0,len=airships.length;i<len;i++){
                         var curMsgSystem=airships[i].msgSystem;
-                        curMsgSystem.receiveMsg(curMsgSystem.bit2jsonAdapter(bitMsg));
+                        curMsgSystem.receiveMsg(Adapter.bitCommand2jsonCommand(bitMsg));
+                    }
+                    for(var i=0,len=screens.length;i<len;i++){
+                        screens[i].receiveMsg(bitMsg);
                     }
                 }
             },passDuration);
              
         },
-        //将指挥官的json指令转换能够广播的二进制指令
-        json2bitAdapter:function(jsonMsg){
-            var msgObj=JSON.parse(jsonMsg),
-                id=+msgObj.id,
-                command=msgObj.command,
-                result=(new Array(4).join('0')+id.toString(2)).slice(-4);
-            result+=commandMap[command];
-            return result;
-        }
+        
     };   
     return Bus;
 })();

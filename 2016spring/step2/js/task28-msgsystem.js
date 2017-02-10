@@ -23,28 +23,23 @@ var MsgSystem=(function(){
                 this.airship[command].apply(this.airship,null);
             }
         },
-        bit2jsonAdapter:function(bitMsg){
-            if(bitMsg.length!==8){
-                return;
-            }
-            var id=parseInt(bitMsg.slice(0,4),2),
-                command=commandMap[bitMsg.slice(4)];
-            return JSON.stringify({'id':id,'command':command});
-        },
+        // bit2jsonAdapter:function(bitMsg){
+        //     if(bitMsg.length!==8){
+        //         return;
+        //     }
+        //     var id=parseInt(bitMsg.slice(0,4),2),
+        //         command=commandMap[bitMsg.slice(4)];
+        //     return JSON.stringify({'id':id,'command':command});
+        // },
         //发送自身的状态，把飞船自身标示，飞行状态，能量编码成一个16位的二进制串
         sendMsg:function(){
-            var result='';
-            //自身标识位置
-            result+=((new Array(4)).join('0')+this.airship.id.toString(2)).slice(-4);
-            //飞行状态位
-            for(var key in commandMap){
-                if(this.airship.state===commandMap[key]){
-                    result+=key;
-                }
-            }
-            //飞机的能量位
-            result+=((new Array(8)).join('0')+(+this.airship.power.toString(2))).slice(-8);  
-            Bus.publishMsg(result);          
+            var stateMsg={
+                id:this.airship.id,
+                state:this.airship.state,
+                power:this.airship.power,
+            };
+            //ConsoleUtil.log('飞船发布信息：'+stateMsg);
+            Bus.publishMsg(Adapter.jsonState2bitState(JSON.stringify(stateMsg)));          
 
         },
         periodicSend:function(){

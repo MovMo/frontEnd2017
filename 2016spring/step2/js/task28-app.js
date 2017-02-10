@@ -8,6 +8,9 @@
     // airship.create();
     // airship.msgSystem.receiveMsg(airship.msgSystem.bit2jsonAdapter('00010001'));    
     
+    //注册大屏系统
+    Bus.registerScreen(Screen);
+    
     //能源，动力选型之后，创建新飞船的事件绑定
     
     getById('createShip_btn').addEventListener('click',function(e){
@@ -31,6 +34,7 @@
             btnHandler(e);
         }
     });
+
 
 })();
 

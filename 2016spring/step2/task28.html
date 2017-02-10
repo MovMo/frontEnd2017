@@ -42,9 +42,10 @@
             text-align: center;
 
         }
-        .show-table td{
+        .show-table td,th{
             border:1px solid #000;
         }
+         
         .show-table thead{
             background-color: #ccc;
         }
@@ -195,16 +196,16 @@
     <div class="main clear-fix">
         <div class="console">
             <table class="show-table">
-                <thead>
+              <thead>
                     <tr>
-                        <td>飞船</td>
-                        <td>动力系统</td>
-                        <td>能源系统</td>
-                        <td>飞行状态</td>
-                        <td>剩余能耗</td>
+                        <th>飞船</th>
+                        <th>动力系统</th>
+                        <th>能源系统</th>
+                        <th>飞行状态</th>
+                        <th>剩余能耗</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="screen">
                     <tr id="show_1">
                         <td id="show-num-1">1号</td>
                         <td id="show-dynamic-1">前进号</td>
@@ -339,6 +340,7 @@
     <script src="./js/common.js"></script>
      <script src="./js/task28-consoleutil.js"></script>
     <script src="./js/task28-animutil.js"></script>
+    <script src="./js/task28-adapter.js"></script>
     <script src="./js/task28-dynamicsystem.js"></script>
     <script src="./js/task28-powersystem.js"></script>
     <script src="./js/task28-msgsystem.js"></script>
@@ -346,6 +348,7 @@
     <script src="./js/task28-commander.js"></script>
     <script src="./js/task28-airship.js"></script>
     <script src="./js/task28-airshipfactory.js"></script>
+    <script src="./js/task28-screen.js"></script>
     <script src="./js/task28-app.js"></script>
 </body>
 </html>
