@@ -1,0 +1,211 @@
+  <!doctype html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>task33</title>
+      <style>
+            *{
+                box-sizing:border-box;
+            }
+            body{
+                padding:0;
+                margin:0;
+            }
+            .checkerborder-wrapper{
+                padding:20px;
+            }
+            .checkerborder{
+                border-collapse: collapse;
+                text-align: center;
+                display: relative;
+            }
+            .checkerborder td{
+                width:40px;
+                height:40px;
+                border:1px solid #ccc;
+            }
+            .checkerborder tr:first-child>td{
+                border:none;
+            }
+            .checkerborder tr>td:first-child{
+                border:none;
+            }
+            .control{
+                padding-left:100px;
+            }
+            #execute-btn{
+                border:1px solid #333;
+                background-color: #fff;
+                margin-left:10px;
+            }
+            #piece{
+                width:40px;
+                height:40px;
+                background-color: red;
+                position: absolute;
+                top:60px;
+                left:60px;
+            }
+            #piece>span{
+                display: block;
+                width:100%;
+                height:10px;
+                background-color: blue;
+
+            }
+      </style>
+  </head>
+  <body>
+      <div class="checkerborder-wrapper" >
+          <table class="checkerborder">
+              <tr>
+                 <td></td>
+                 <td>1</td>
+                 <td>2</td>
+                 <td>3</td>
+                 <td>4</td>
+                 <td>5</td>
+                 <td>6</td>
+                 <td>7</td>
+                 <td>8</td>
+                 <td>9</td>
+                 <td>10</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>2</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>3</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>6</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>7</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>8</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>9</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>10</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </table>
+          <div id="piece"><span></span></div>
+      </div>
+      <div class="control"><input type="text" id="command_input"><button id="execute-btn">执行</button></div>
+      <script src="./js//common.js"></script>
+    <script src="./js/task33.js"></script>
+  </body>
+  </html>
