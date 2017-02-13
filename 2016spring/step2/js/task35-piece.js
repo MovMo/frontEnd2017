@@ -32,7 +32,7 @@ var Piece=(function(){
             }
             return result;
         },
-        go:function(direction){
+        go:function(direction){             
              var curDirection=direction||this.getDicrection(),
                 isHorizontal=(curDirection==='left'||curDirection==='right'),
                 isPositive=(curDirection==='bottom'||curDirection==='right'),

@@ -2,7 +2,7 @@ var UserIn=(function(){
     var rowList=getById('rowList'),
         consoleTa=getById('commandTa'),
         regWrap=/\n/,         
-        commands=[/^go\s[\d+]$/,/^turn[Left|Right|Bottom]$/];//有效的命令格式
+        regCommands=var commands=[/^(go)(?:\s+(\d+))?$/,/^turn[Left|Right|Bottom]$/,/^move[Left|Right|Bottom](:\s+(\d+))?$/,/^tra[Left|Right|Bottom](:\s+(\d+))?$/];//有效的命令格式
    
     function addNum(){
         var value=consoleTa.value,
@@ -27,8 +27,36 @@ var UserIn=(function(){
         },
         execute:function(){
             var value=consoleTa.value,
-                commands=value.split(/\r\n/);
-        }
+                commands=value.split(/\r\n/),
+                i,len,regResult,command,times,index;
+            for(i=0,len=commands.length;i<len;i++){                 
+                regResult=valid(commands[i]);
+                if(regResult===false){
+                    //呈现错误的提示
+                    rowList.children[i].className='error';
+                }else{
+                    index=0;
+                    command=result[1];
+                    num=command[2];
+                    if(typeof num==='number'){
+                        setInterval(function(){
+                            index++;
+                            piece[command].apply(piece);
+                        },500);
+                    }
+                     
+                }
+            }
+        },
+        valid:function(commandText){
+            var regResult;
+            for(var i=0,len=regCommands.length;i<len;i++){
+                if((result=commandText.match(regCommands[i]))!=null){
+                    return result;
+                }
+            }
+            return false;
+        },
     };
 
 })();
