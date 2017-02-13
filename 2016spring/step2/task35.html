@@ -46,6 +46,7 @@
                 position: absolute;
                 top:60px;
                 left:60px;
+                transition:all 500ms linear;
             }
             #piece>span{
                 display: block;
@@ -71,15 +72,18 @@
               background-color: #ccc;
               color:#fff;
               text-align: center;
+              overflow:hidden;
             }
             .row-num-list>div{
               height:20px;
               line-height: 20px;
               font-size:13.3px;
             }
-            .row-num-list>div.current{
+            .row-num-list>div.error{
               background-color: red;
+              border-radius: 10px;
             }
+
             .my-control{
               width:100%;
               line-height:20px;
@@ -244,13 +248,14 @@
       </div>
       <div class="control"><button id="execute-btn">执行</button><button id="refresh-btn">清空</button></div>
       <div class="my-control-wrapper">
-        <div class="row-num-list" id="commandTa">
-          <div>1</div>
-          <div>2</div>
+        <div class="row-num-list" id="rowList">
+           
         </div>
         <textarea name="" id="commandTa" cols="60" rows="8" class="my-control"></textarea>
       </div>
     <script src="./js//common.js"></script>
     <script src="./js/task35-myconsole.js"></script>
+    <script src="./js/task35-piece.js"></script>
+    <script src="./js/task35-app.js"></script>
   </body>
   </html>

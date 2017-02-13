@@ -16,8 +16,8 @@ var Piece=(function(){
             this.column=column;
             this.dicrection='top';
             this.pieceDom=getById(id);
-            this.pieceDom.style.left=START_LEFT+this.row*TD_WIDTH;
-            this.pieceDom.style.top=START_TOP+this.column*TD_WIDTH;
+            this.pieceDom.style.left=(START_LEFT+this.row*TD_WIDTH)+'px';
+            this.pieceDom.style.top=(START_TOP+this.column*TD_WIDTH)+'px';
         },
         getDicrection:function(){
             var result='top';
@@ -32,8 +32,8 @@ var Piece=(function(){
             }
             return result;
         },
-        go:function(){
-             var curDirection=this.getDicrection(),
+        go:function(direction){
+             var curDirection=direction||this.getDicrection(),
                 isHorizontal=(curDirection==='left'||curDirection==='right'),
                 isPositive=(curDirection==='bottom'||curDirection==='right'),
                 initPos,endPos,timer;
@@ -49,8 +49,8 @@ var Piece=(function(){
                     return;
                 }
                 endPos=START_LEFT+this.column*TD_WIDTH;
-                AnimUtil.updatePosition(this.pieceDom,'left',initPos,DIS_STEP,endPos,'px');
-                //this.pieceDom.style.left=(START_LEFT+this.column*TD_WIDTH)+'px';
+                //AnimUtil.updatePosition(this.pieceDom,'left',initPos,DIS_STEP,endPos,'px');
+                this.pieceDom.style.left=(START_LEFT+this.column*TD_WIDTH)+'px';
                 
             }else{
                 initPos=START_TOP+this.row*TD_WIDTH;
@@ -63,32 +63,30 @@ var Piece=(function(){
                     return;
                 }
                 endPos=START_TOP+this.row*TD_WIDTH;
-                AnimUtil.updatePosition(this.pieceDom,'top',initPos,DIS_STEP,endPos,'px');       
-                         
+                //AnimUtil.updatePosition(this.pieceDom,'top',initPos,DIS_STEP,endPos,'px');       
+                this.pieceDom.style.top=(START_TOP+this.row*TD_WIDTH)+'px';      
             }             
         },
-        turn:function(initDeg){
-            
-            AnimUtil.updatePosition(this.pieceDom,'transform',initDeg,DEG_STEP,this.deg,'deg'); 
+        turn:function(deg){
+            this.pieceDom.style.transform='rotate('+deg+'deg)';
+            //AnimUtil.updatePosition(this.pieceDom,'transform',initDeg,DEG_STEP,this.deg,'deg'); 
             if(this.deg<=-360||this.deg>=360){
                 this.deg=0;
             }                 
         },
-        turnLeft:function(){         
-            var initDeg=this.deg,endDeg;                
+        turnLeft:function(){   
+                          
             this.deg-=90;     
-            this.turn(initDeg);
+            this.turn(this.deg);
                
         },
-        turnRight:function(){
-            var initDeg=this.deg;
+        turnRight:function(){             
             this.deg+=90;
-            this.turn(initDeg);
+            this.turn(this.deg);
         },
-        turnBottom:function(){
-            var initDeg=this.deg;
+        turnBottom:function(){         
             this.deg+=180;
-            this.turn(initDeg);             
+            this.turn(this.deg);             
         },
         moveLeft:function(){
             //先将方向旋转到左边
@@ -114,40 +112,40 @@ var Piece=(function(){
                 this.turnRight();
             }
             this.go();
+        },
+        //向左移动，方向不变
+        traLeft:function(){
+            this.go('left');
+        },
+        traRight:function(){
+            this.go('right');
+        },
+        traTop:function(){
+            this.go('top');
+        },
+        traBottom:function(){
+            this.go('bottom');
         }
     };
     return Piece;
 })();
 
-var AnimUtil={
-    updatePosition:function(elem,property,startValue,stepValue,endValue,unit){
-        var curValue=startValue,
-            isPositive=curValue<endValue;
-        var timer=setInterval(function(){
-            curValue+=isPositive?stepValue:-stepValue;
-            if(curValue>=endValue&&isPositive||curValue<=endValue&&!isPositive){
-                curValue=endValue;
-                clearInterval(timer);
-            }
-            if(unit!=='deg'){
-                elem.style[property]=curValue+unit;
-            }else{
-                elem.style[property]='rotate('+curValue+'deg)';
-            }        
-        },100);
-    },    
-};
-var commandInput=getById('command_input'),
-    commands=['go','turnRight','turnLeft','turnBottom','moveBottom','moveTop','moveRight','moveLeft'];
-var piece=Object.create(Piece);
-piece.init('piece',1,1);
-// getById('execute-btn').addEventListener('click',function(){
-//     var command=commandInput.value;
-//     for(var i=0,len=commands.length;i<len;i++){
-//         if(command===commands[i]){
-//             piece[command].apply(piece,null);
-//             break;
-//         }
-//     }
-
-// },false);
+//不使用setInterval，而是使用css3的transion属性来完成动画
+// var AnimUtil={
+//     updatePosition:function(elem,property,startValue,stepValue,endValue,unit){
+//         var curValue=startValue,
+//             isPositive=curValue<endValue;
+//         var timer=setInterval(function(){
+//             curValue+=isPositive?stepValue:-stepValue;
+//             if(curValue>=endValue&&isPositive||curValue<=endValue&&!isPositive){
+//                 curValue=endValue;
+//                 clearInterval(timer);
+//             }
+//             if(unit!=='deg'){
+//                 elem.style[property]=curValue+unit;
+//             }else{
+//                 elem.style[property]='rotate('+curValue+'deg)';
+//             }        
+//         },100);
+//     },    
+// };

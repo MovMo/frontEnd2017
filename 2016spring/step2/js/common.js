@@ -63,7 +63,7 @@ function serialize(form){
 }
 //获得计算后的css样式
 function getComputedStyle(elem,style){
-    return indow.getComputedStyle(elem,null).getPropertyValue(style);
+    return window.getComputedStyle(elem,null).getPropertyValue(style);
 }
 //获取单选按钮选中值
 function getCheckedRadioValue(name){
