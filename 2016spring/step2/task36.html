@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task36</title>
+    <style> 
+        *{
+            margin:0;
+            padding:0;
+            border-box:box-sizing;
+        }
+        .content{
+            margin:0 auto;
+            padding:30px 0;
+            width:1240px;
+        }
+        .clear-fix{
+            display: table;
+            content:'';
+            clear:both;            
+        }
+        .main{
+            width:800px;
+            float:left;
+            min-height:800px;    
+            background-color: blue;        
+        }
+        aside{
+            width:440px;
+            float:left;
+            min-height: 800px;
+            background-color:pink;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div class="content clear-fix">
+        <div class="main">
+            <div class="qi-wrapper">
+                <table class="qipan"></table>
+                <div class="qizi"></div>
+            </div>
+        </div>
+        <aside>
+            <div class="control-wrapper">
+                <select name="" id="qipan-sel">
+                    <option value="30">30*30</option>
+                    <option value="20">20*20</option>
+                </select>
+                <select name="" id="speed-sel">
+                    
+                </select>
+                <button id="execute-btn">运行</button>
+                <button id="refresh-btn">重置</button>
+                <button id="randomBuild-btn">随机修墙</button>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
