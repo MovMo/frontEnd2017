@@ -2,12 +2,15 @@ var UserIn=(function(){
     var rowList=getById('rowList'),
         consoleTa=getById('commandTa'),
         regWrap=/\n/,         
-        regCommands=var commands=[/^(go)(?:\s+(\d+))?$/,/^turn[Left|Right|Bottom]$/,/^move[Left|Right|Bottom](:\s+(\d+))?$/,/^tra[Left|Right|Bottom](:\s+(\d+))?$/];//有效的命令格式
+        regCommands=[/^(go)(?:\s+(\d+))?$/,/^(turn(?:Left|Right|Bottom))$/,/^(move(?:Left|Right|Bottom|Top))(?:\s+(\d+))?$/,/^(tra(?:Left|Right|Bottom|Top))(?:\s+(\d+))?$/];//有效的命令格式
    
     function addNum(){
         var value=consoleTa.value,
             len=value.split(regWrap).length,
             curStr='';
+        if(len===rowList.children.length){
+            return;
+        }
         for(var i=1;i<=len;i++){
             curStr+='<div>'+i+'</div>';
         }
@@ -27,26 +30,42 @@ var UserIn=(function(){
         },
         execute:function(){
             var value=consoleTa.value,
-                commands=value.split(/\r\n/),
-                i,len,regResult,command,times,index;
-            for(i=0,len=commands.length;i<len;i++){                 
-                regResult=valid(commands[i]);
-                if(regResult===false){
-                    //呈现错误的提示
-                    rowList.children[i].className='error';
-                }else{
-                    index=0;
-                    command=result[1];
-                    num=command[2];
-                    if(typeof num==='number'){
-                        setInterval(function(){
-                            index++;
-                            piece[command].apply(piece);
-                        },500);
-                    }
-                     
+                commands=value.split(/\n/),
+                len=commands.length,
+                i=0,
+                self=this,
+                timer,
+                stack=[];
+                for(i=len-1;i>=0;i--){
+                    stack[stack.length]={'index':i,'command':commands[i]};
                 }
-            }
+                timer=setInterval(function(){
+                    var curItem=stack.pop();
+                    if(!curItem){
+                        clearInterval(timer);
+                        return;
+                    }
+
+                    var curCommand=curItem['command'],
+                        curIndex=curCommand['index'],
+                        regResult=self.valid(curCommand),
+                        num;
+                    if(regResult===false){
+                        rowList.children[curIndex].className='error';
+                    }else{
+                        curCommand=regResult[1];
+                        num=regResult[2]&&(+regResult[2]);
+                        if(typeof num==='number'){
+                            while(--num){
+                                stack[stack.length]={'index':curIndex,'command':curCommand};
+                            }
+                        }
+                        self.piece[curCommand].apply(self.piece,null);
+                    }
+
+
+                },500);
+
         },
         valid:function(commandText){
             var regResult;
@@ -57,6 +76,11 @@ var UserIn=(function(){
             }
             return false;
         },
+        clear:function(){
+            //将输入命令的textArea进行清空
+            consoleTa.value='';
+            rowList.innerHTML='';
+        }
     };
-
+    return UserIn;
 })();
