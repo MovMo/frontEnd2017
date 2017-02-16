@@ -8,6 +8,8 @@
             margin:0;
             padding:0;
             border-box:box-sizing;
+            font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+
         }
         .content{
             margin:0 auto;
@@ -22,15 +24,93 @@
         .main{
             width:800px;
             float:left;
-            min-height:800px;    
-            background-color: blue;        
+            min-height:800px;          
         }
         aside{
             width:440px;
             float:left;
             min-height: 800px;
-            background-color:pink;
+            overflow: hidden;
+ 
         }
+        .control-wrapper{
+            padding:5px 20px;                  
+
+        }
+        .console-wrapper{
+            height:775px;
+            color:#fff;
+            font-size:16px;  
+            font-family: Menlo, Consolas, monospace;          
+
+        }
+        .console-lines{
+            width:40px;
+            height:100%;
+            overflow: hidden;             
+            background-color: #2C3E50; 
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px; 
+            float:left;   
+            padding:5px 0; 
+            font-size:14px;     
+        }
+        .console-line{
+            height:20px;
+            line-height: 20px;
+            padding-right:5px;
+            text-align: right;
+            color: #ecf0f1;
+        }
+        .console-editor{
+            padding:5px 0;
+            width:360px;
+            height:100%;
+            float:left;
+            background-color:#34495E; 
+            border:none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            line-height: 20px;
+            color: #ecf0f1;
+            
+        }
+        .qi-wrapper{
+            padding:5px 11px;
+        }
+        .qipan{
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .qipan.type30 td{
+            width:20px;
+            height:20px;
+        }
+        .qipan.type20 td{
+            width:37px;
+            height:37px;
+        }
+        
+        .qipan td.qipan-ge{
+            border:1px solid #ccc;
+
+        }
+        .qipan td.y-axis{            
+            border-right:1px solid #000;
+            
+        }
+        .qipan td.x-axis{
+             
+            border-bottom: 1px solid #000;        
+        }
+        .qipan td.wall{
+            background-color: #BDC3C7;
+        }
+        .qizi{
+            position:absolute;            
+            background: url(./imgs/bot.png) no-repeat  ;
+        }
+
 
     </style>
 
@@ -40,7 +120,7 @@
     <div class="content clear-fix">
         <div class="main">
             <div class="qi-wrapper">
-                <table class="qipan"></table>
+                <table class="qipan" id="qipan"></table>
                 <div class="qizi"></div>
             </div>
         </div>
@@ -51,13 +131,25 @@
                     <option value="20">20*20</option>
                 </select>
                 <select name="" id="speed-sel">
-                    
+                    <option value="500">慢速</option>
+                    <option value="250">中速</option>                    
+                    <option value="100">快速</option>
+                    <option value="0">极速</option>
                 </select>
                 <button id="execute-btn">运行</button>
                 <button id="refresh-btn">重置</button>
                 <button id="randomBuild-btn">随机修墙</button>
             </div>
+            <div class="console-wrapper">
+                <div class="console-lines">
+                    <div class="console-line">1</div>
+                </div>
+                <textarea class="console-editor"></textarea>
+            </div>
         </aside>
     </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/task36-qipan.js"></script>
+    <script src="./js/task36-app.js"></script>
 </body>
 </html>
