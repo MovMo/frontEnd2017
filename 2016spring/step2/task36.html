@@ -7,7 +7,7 @@
         *{
             margin:0;
             padding:0;
-            border-box:box-sizing;
+            box-sizing:border-box;
             font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
 
         }
@@ -76,15 +76,16 @@
             
         }
         .qi-wrapper{
-            padding:5px 11px;
+            margin:5px 11px;
+            position:relative;
         }
         .qipan{
             border-collapse: collapse;
             text-align: center;
         }
         .qipan.type30 td{
-            width:20px;
-            height:20px;
+            width:25px;
+            height:25px;
         }
         .qipan.type20 td{
             width:37px;
@@ -108,7 +109,25 @@
         }
         .qizi{
             position:absolute;            
-            background: url(./imgs/bot.png) no-repeat  ;
+            background: url(./imgs/bot.png) no-repeat ;
+            background-size: contain;
+            top:37px;
+            left:37px;
+            width:37px;
+            height:37px;
+            transition:all 250ms linear;
+        }
+        .qizi.type20{
+            width:37px;
+            height:37px;
+            top:37px;
+            left:37px;
+        }
+        .qizi.type30{
+            width:25px;
+            height:25px;
+            top:25px;
+            left:25px;
         }
 
 
@@ -121,7 +140,7 @@
         <div class="main">
             <div class="qi-wrapper">
                 <table class="qipan" id="qipan"></table>
-                <div class="qizi"></div>
+                <div class="qizi" id="qizi"></div>
             </div>
         </div>
         <aside>
@@ -150,6 +169,8 @@
     </div>
     <script src="./js/common.js"></script>
     <script src="./js/task36-qipan.js"></script>
+    <script src="./js/task36-qizi.js"></script>
+    <script src="./js/task36-qi.js"></script>
     <script src="./js/task36-app.js"></script>
 </body>
 </html>

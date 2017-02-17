@@ -1,13 +1,10 @@
 var Qipan={
-    init:function(id,rows,columns,className){
-        this.elem=getById(id);
-        this.cells=[]; 
-        this.rows=rows;//棋盘的行数
-        this.columns=columns;//棋盘的列数
-        addClass(this.elem,className);
-        this.create(rows,columns);       
+    init:function(id){
+        this.elem=getById(id);                  
     },
     create:function(rows,columns){
+        this.rows=rows;
+        this.columns=columns;
         var i,j,td,curStr='';
         for(i=0;i<=rows;i++){
             curStr+='<tr>'
@@ -32,6 +29,8 @@ var Qipan={
         }
         this.elem.innerHTML=curStr;
         this.cells=this.elem.getElementsByTagName('td');
+        //addClass(this.elem,'type'+rows);
+        this.elem.className='qipan type'+rows;
     },
     //新建修墙的指令
     build:function(curRow,curColumn){
