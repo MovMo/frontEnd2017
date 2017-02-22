@@ -31,6 +31,9 @@ var Qipan={
         this.cells=this.elem.getElementsByTagName('td');
         //addClass(this.elem,'type'+rows);
         this.elem.className='qipan type'+rows;
+        //每一格的边长
+        this.offset=this.cells[0].clientWidth;
+        console.log(this.offset);
     },
     //新建修墙的指令
     build:function(curRow,curColumn){
@@ -76,6 +79,9 @@ var Qipan={
     },
     isQige:function(curRow,curColumn){
         return (curRow>=1&&curRow<=this.rows)&&(curColumn>=1&&curColumn<=this.columns); 
+    },
+    isAvailable:function(curRow,curColumn){
+        return !this.isWall(curRow,curColumn)&&this.isQige(curRow,curColumn);
     }
 
 };

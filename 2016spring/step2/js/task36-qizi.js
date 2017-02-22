@@ -4,7 +4,7 @@ var Qizi=(function(){
         180:{0:180,90:90,180:0,270:-90},
         270:{0:-90,90:180,180:90,270:0}
     };
-    var directionMap= {top:[-1,0],right:[0,1],bac:[0,1],left:[-1,0]};
+    var stepMap= {0:[-1,0],90:[0,1],180:[1,0],270:[-1,0]};
 
     var Qizi={
         init:function(id){
@@ -15,20 +15,20 @@ var Qizi=(function(){
         },     
         //旋转deg度
         //deg可选值为[90，-90,180]
-        tur:function(deg){
+        tun:function(deg){
             this.deg+=deg;
-            this.deg=this.deg%360;
+            this.deg=this.deg%360;            
+            this.elem.style.transform='rotate('+this.deg+'deg)';
             if(this.deg<0){
                 this.deg+=360;
             }
-            this.elem.style.transform='rotate('+this.deg+'deg)';
         },
         //旋转至deg度
-        turTo:function(deg){
+        tunTo:function(deg){
             //[目标角度值：{当前角度值：要旋转的角度值}]
 
             if(this.deg!=deg){
-                this.tur(degMap[deg][this.deg]);    
+                this.tun(degMap[deg][this.deg]);    
             }        
         },
 
@@ -50,34 +50,46 @@ var Qizi=(function(){
             if(turn){
                 //TOdo:如果同时需要水平移动和垂直移动呢？
                 if(offsetRow<0){
-                    this.turTo(270);
+                    this.tunTo(270);
                 }else if(offsetRow[0]>0){
-                    this.turTo(90);
+                    this.tunTo(90);
                 }
-                this.row+=offsetRow;
-                this.elem.style.top=this.row*offset+'px';
+
                 if(offsetColumn[1]>0){
-                    this.turTo(180);
+                    this.tunTo(180);
                 }else if(offsetColumn[1]<0){
-                    this.turTo(0);
+                    this.tunTo(0);
                 }
-            }            
-            this.column+=offsetColumn;            
-            this.elem.style.left=this.column*offset+'px';
+            }
+            if(offsetRow!==0){
+                this.row+=offsetRow;
+                this.elem.style.top=this.row*offset+'px';                 
+            }  
+            if(offsetColumn!==0){
+                this.column+=offsetColumn;            
+                this.elem.style.left=this.column*offset+'px';                
+            }
+
         },
         //对应方向平移异步，无需旋转
-        //dire
+        //direction的取值为[0|90|180|-90]
+        //offset为棋盘格子的边长
         tra:function(direction,offset){
-            var offsets=directionMap[direction];
+            var offsets=stepMap[direction];
             this.goBy(offsets[0],offsets[1],false,offset);
         },
+        //对应方向平移异步，无需旋转
+        //direction的取值为[0|90|180|-90]
+        //offset为棋盘格子的边长
         mov:function(direction,offset){
-            var offsets=directionMap[direction];
+            var offsets=stepMap[direction];
             this.goBy(offsets[0],offsets[1],true,offset);
         },
         //根据旗子当前的方向，获取下一个坐标值
-        getNextCood:function(direction){    
-
+        getNextCood:function(direction){
+            var tmpMap=direction?stepMap[direction]:stepMap[this.deg];    
+            return [this.row+tmpMap[0],
+                    this.column+tmpMap[1]];
         }
     };
     return Qizi;
