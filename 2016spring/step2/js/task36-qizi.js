@@ -4,7 +4,7 @@ var Qizi=(function(){
         180:{0:180,90:90,180:0,270:-90},
         270:{0:-90,90:180,180:90,270:0}
     };
-    var stepMap= {0:[-1,0],90:[0,1],180:[1,0],270:[-1,0]};
+    var stepMap= {0:[-1,0],90:[0,1],180:[1,0],270:[0,-1]};
 
     var Qizi={
         init:function(id){
@@ -16,9 +16,10 @@ var Qizi=(function(){
         //旋转deg度
         //deg可选值为[90，-90,180]
         tun:function(deg){
-            this.deg+=deg;
-            this.deg=this.deg%360;            
+            this.deg+=deg;         
+
             this.elem.style.transform='rotate('+this.deg+'deg)';
+             this.deg=this.deg%360; 
             if(this.deg<0){
                 this.deg+=360;
             }
@@ -28,7 +29,7 @@ var Qizi=(function(){
             //[目标角度值：{当前角度值：要旋转的角度值}]
 
             if(this.deg!=deg){
-                this.tun(degMap[deg][this.deg]);    
+                this.tun(degMap[deg][this.deg]);                    
             }        
         },
 
@@ -50,15 +51,15 @@ var Qizi=(function(){
             if(turn){
                 //TOdo:如果同时需要水平移动和垂直移动呢？
                 if(offsetRow<0){
-                    this.tunTo(270);
-                }else if(offsetRow[0]>0){
-                    this.tunTo(90);
+                    this.tunTo(0);
+                }else if(offsetRow>0){
+                    this.tunTo(180);
                 }
 
-                if(offsetColumn[1]>0){
-                    this.tunTo(180);
-                }else if(offsetColumn[1]<0){
-                    this.tunTo(0);
+                if(offsetColumn>0){
+                    this.tunTo(90);
+                }else if(offsetColumn<0){
+                    this.tunTo(270);
                 }
             }
             if(offsetRow!==0){
@@ -90,7 +91,8 @@ var Qizi=(function(){
             var tmpMap=direction?stepMap[direction]:stepMap[this.deg];    
             return [this.row+tmpMap[0],
                     this.column+tmpMap[1]];
-        }
+        },
+
     };
     return Qizi;
 })();

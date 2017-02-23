@@ -11,7 +11,8 @@ var Qi=(function(){
         {},
         {}
     ];
-    var directionMap={'top':0,'lef':270,'rig':90,'bac':180};     
+    var tunMap={'top':0,'lef':-90,'rig':90,'bac':180};
+    var directionMap={'top':0,'lef':270,'rig':90,'bot':180};     
     var Qi={
         init:function(){
             var qipan=Object.create(Qipan);
@@ -28,7 +29,7 @@ var Qi=(function(){
         },
         //旋转
         tun:function(direction){
-            this.qizi.tun(directionMap[direction]);
+            this.qizi.tun(tunMap[direction]);
         },
         //修墙
         //在curRow,curColumn对应的位置修墙
@@ -70,6 +71,14 @@ var Qi=(function(){
                 return;
             }
             this.qizi.tra(directionMap[direction],this.qipan.offset);
+        },
+        //向着头部所指的位置移动一步
+        go:function(){
+            if(!this.checkPath()){
+                console.log('此方向路不通！');
+                return;
+            }
+            this.qizi.tra(this.qizi.deg,this.qipan.offset);
         },
         randomBuild:function(){
             this.qipan.randomBuild();
