@@ -75,16 +75,18 @@ var Qizi=(function(){
         //对应方向平移异步，无需旋转
         //direction的取值为[0|90|180|-90]
         //offset为棋盘格子的边长
-        tra:function(direction,offset){
-            var offsets=stepMap[direction];
-            this.goBy(offsets[0],offsets[1],false,offset);
+        tra:function(direction,offset,step){
+            var offsets=stepMap[direction],
+                step=step||1;
+            this.goBy(offsets[0]*step,offsets[1]*step,false,offset);
         },
         //对应方向平移异步，无需旋转
         //direction的取值为[0|90|180|-90]
         //offset为棋盘格子的边长
-        mov:function(direction,offset){
-            var offsets=stepMap[direction];
-            this.goBy(offsets[0],offsets[1],true,offset);
+        mov:function(direction,offset,step){
+            var offsets=stepMap[direction],
+                step=step||1;
+            this.goBy(offsets[0]*step,offsets[1]*step,true,offset);
         },
         //根据旗子当前的方向，获取下一个坐标值
         getNextCood:function(direction){
