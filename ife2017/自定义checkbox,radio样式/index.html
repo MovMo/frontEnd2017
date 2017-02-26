@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义单选框/复选框</title>
+    <style>
+        input[type="radio"]{
+            display: none;
+        }
+        input[type="checkbox"]{
+            display: none;
+        }
+
+        div.wrapper{
+            padding:10px 30px;
+        }
+        .my-radio{
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            background: url(./imgs/icon.png) no-repeat;
+            background-position: -22px -10px ;     
+            /*transition:background-position 500ms;*/    
+        }
+        .radio-wrapper>input[type="radio"]:checked+label{
+            background-position: -59px -10px;
+        }
+        .my-checkbox{
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            background: url(./imgs/icon.png) no-repeat;
+            background-position: -22px -33px ;    
+            /*transition:background-position 500ms;*/              
+        }
+        .checkbox-wrapper>input[type="checkbox"]:checked+ label{
+            background-position: -59px -32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper radio-wrapper"><input type="radio" id="radioInput"><label for="radioInput" class="my-radio"></label></div>
+    <div class="wrapper checkbox-wrapper"><input type="checkbox" id="checkboxInput"><label for="checkboxInput" class="my-checkbox"></label></div>   
+</body>
+</html>
