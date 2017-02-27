@@ -8,6 +8,7 @@ Observer.prototype.walk = function() {
         if (this.data.hasOwnProperty(key)) {
             var val = this.data[key];
             if (Object.prototype.toString.call(val) === '[object Object]') {
+                //递归调用
                 new Observer(val);
             }
             this.convert(key, val);
@@ -27,7 +28,15 @@ Observer.prototype.convert = function(key, val) {
         },
         set: function(newValue) {
             console.log('你设置了 ' + key + '，新的值为 ' + newValue);
-            val = newValue;
+            if (val === newValue) {
+                return;
+            }
+            //如果重新设置的属性值为对象的话，依旧可以在访问或者设置时调用回调
+            if(Object.prototype.toString.call(newValue) === '[object Object]'){
+                val=new Observer(newValue).data;
+                return;
+            } 
+            val = newValue;                         
         },
     });
 };

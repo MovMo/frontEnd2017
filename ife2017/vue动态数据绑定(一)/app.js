@@ -17,3 +17,4 @@ app1.data.age = 100;  // 你设置了 age，新的值为100
 app2.data.university; // 你访问了 university
 app2.data.major = 'science';  // 你设置了 major，新的值为 science
 
+ 
