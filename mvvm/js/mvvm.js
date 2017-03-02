@@ -11,6 +11,7 @@ var MVVM = {
         });
         this.$compile = Object.create(Compile);
         this.$compile.init(options.el, this);
+
     },
     //可以使用vm.prop直接访问，不需要通过vm.data.prop访问
     _proxy: function(key) {

@@ -6,7 +6,10 @@ var model = {
         hobby: {
             sport: 'swim'
         },
-        isActive:'active',
+        isActive: 'active',
+        child: {
+            name: 'zhengzheng',
+        }
     },
     methods: {
         dosomething: function() {

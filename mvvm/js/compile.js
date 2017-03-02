@@ -97,7 +97,14 @@ var Compile = {
                 self._setVMVal(vm, props, value);
             }, false);
         }
-        //接下来是创建一个订阅者watcher,暂时搁置
+        //对每一个vm指令指定的属性，进行监听，创建其对应的订阅者watcher
+        var watcher=Object.create(Watcher);
+
+        watcher.init(vm,props,function(value,oldValue){
+            //参数el在这个地方传递
+            //参数value,oldValue在watcher中赋值
+            updater&&updater(el,value,oldValue);
+        });
     },
     //判断属性是否是指令
     isDirective: function(attrName) {
@@ -118,7 +125,7 @@ var Compile = {
         var val = vm.data,
             propArr = props.split('.');
         propArr.forEach(function(k, i) {
-            if (i === propArr.length) {
+            if (i === propArr.length-1) {
                 val[k] = value;
             } else {
                 val = val[k];
