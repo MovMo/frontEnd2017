@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>UI组件之浮出层</title>
+    <link rel="stylesheet" href="./css/modal.css"></head>
+<body>
+    <button id="btn">打开模态框</button>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">模态框标题</h4>
+                    <button class="close"></button>
+                </div>
+                <div class="modal-body">这里是模态框的内容</div>
+                <div class="modal-footer">
+                    <div class="f-right">
+                        <button id="certain" class="btn mgRight10">确定</button>
+                        <button id="cancel" class="btn btn-primary">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../common/js/common.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/app.js"></script>
+</html>

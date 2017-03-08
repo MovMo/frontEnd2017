@@ -1,0 +1,99 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+body{
+    font-size:12px;
+    font-family: "Micorsoft Yahei";
+    overflow-y:auto;
+    min-height:2000px;
+}
+.clear-fix,.clear-fix:after,.clear-fix:before{
+    content:'';
+    clear:both;
+    display: table;
+}
+.f-left{
+    float:left;
+}
+.f-right{
+    float: right;
+}
+.mgRight10{
+    margin-right: 10px;
+}
+.modal{
+    /*不透明遮罩部分的应为fixed布局，保证页面滚动的时候保持不变*/
+    position:fixed;    
+    /*fixed布局下，相对于窗口布局，width:100%,height100% 在窗口大小改变的时候也能够自适应调整宽和高，始终保持和窗口大小一致*/
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: rgba(100,100,100,.2);
+    z-index:10;
+}
+
+.modal-dialog{
+    background-color: #fff;
+    position: absolute;      
+    left:50%;
+    top:50%;    
+    transform:translate(-50%,-50%);    
+    z-index:100;
+    border-radius: 5px;
+    min-width:500px;    
+    width:100px;
+}
+.modal-header{     
+    overflow: hidden;
+    position:relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #ccc;
+    padding:15px;
+    font-size:1.2em;
+    cursor:move;
+} 
+
+.close:before{
+    content:'×';
+    color:#999;
+    font-size:1.4em;
+}
+.close{
+    float:right;    
+    background:none;
+    padding:0;
+    position:absolute;
+    top:50%;
+    transform:translate(0,-50%);
+    right:10px;
+    border:none;
+    cursor:pointer;
+}
+
+.modal-body{
+    min-height:150px;
+    padding:15px;
+}
+.modal-footer{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top:1px solid #ccc;
+    min-height:50px;
+    padding:15px;
+    overflow: hidden;
+}
+.btn{
+    border:1px solid #ccc;
+    border-radius: 5px;
+    background: none;
+    padding:5px 10px;
+}
+.btn-primary{
+    background-color: #337AB7;
+    color:#fff;
+}
