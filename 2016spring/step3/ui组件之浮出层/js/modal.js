@@ -35,8 +35,8 @@ var Modal = {
         //处理拖拽
         header.addEventListener('mousedown', this.mousedownHandler.bind(this), false);
         //处理缩放
-        header.addEventListener('mousemove', this.mousemoveHandler.bind(this), false);
-        header.addEventListener('mouseup', this.mouseupHandler.bind(this), false);
+        document.body.addEventListener('mousemove', throttle(this.mousemoveHandler,this,10), false);
+        document.body.addEventListener('mouseup', this.mouseupHandler.bind(this), false);
 
     },
     mousedownHandler: function(e) {
@@ -50,7 +50,7 @@ var Modal = {
 
     },
     mousemoveHandler: function(e) {
-
+        console.log('mousemove',this.isDraging);
         if (this.isDraging) {
             console.log('mousemove:', this.isDraging);
             var ex = e.clientX,
@@ -86,9 +86,11 @@ var Modal = {
             return;
         }
         this.modal.style.display = 'block';
+        this.isDraging=false;
 
     },
     hide: function(e) {
+        this.isDraging=false;
         if (this.isVisable()) {
             this.modal.style.display = 'none';
         }
