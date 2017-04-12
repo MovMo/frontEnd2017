@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基于CSS实现折叠面板</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .item {
+        margin-bottom: 15px;
+    }
+    
+    .accordion {
+        margin: 0 auto;
+        width: 400px;
+        height: auto;
+    }
+    
+    .panel-heading {
+        background-color: rgba(7, 17, 27, .2);
+        padding: 10px 20px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border: 1px solid rgb(7, 17, 27);
+    }
+    
+    .panel-body {
+        padding: 10px 20px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: 1px solid rgb(7, 17, 27);
+        border-top: none;
+    }
+    
+    .item-radio {
+        display: none;
+    }
+    
+    .item p {
+        display: none;
+    }
+    
+    .item-radio:checked~p {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>任务描述</h3>
+    <ul>
+        <li>使用input的radio单选框特性结合css伪元素实现折叠面板 </li>
+    </ul>
+    <h3>任务注意事项</h3>
+    <ul>
+        <li>当其中一个面对折叠时，其他面板需要隐藏</li>
+        <li>
+            只能使用HTML，CSS，不允许使用JavaScript</li>
+        <li>注意测试不同情况，尤其是极端情况下的效果</li>
+        <li>
+            有能力的同学在面板折叠或者展开时添加动画效果
+        </li>
+    </ul>
+    <div class="accordion">
+        <div class="item">
+            <label>
+                <input name="item-radio" class="item-radio" type="radio" checked>
+                <h3 class="panel-heading">选项一</h3>
+                <p class="panel-body">
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                </p>
+            </label>
+        </div>
+        <div class="item">
+            <label>
+                <input name="item-radio" class="item-radio" type="radio">
+                <h3 class="panel-heading">选项二</h3>
+                <p class="panel-body">
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                </p>
+            </label>
+        </div>
+        <div class="item">
+            <label>
+                <input name="item-radio" class="item-radio" type="radio">
+                <h3 class="panel-heading">选项三</h3>
+                <p class="panel-body">
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                </p>
+            </label>
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
