@@ -44,7 +44,7 @@ Observer.convert = function(key, value) {
             return value;
         },
         set: function(newValue) {
-            if (value ===newValue) {
+            if (value === newValue) {
                 return;
             }
             self.notify(key, key, newValue);
@@ -69,4 +69,3 @@ Observer.notify = function(key, path, val) {
 Observer.$watch = function(key, fn) {
     this.on(key, fn);
 };
-
