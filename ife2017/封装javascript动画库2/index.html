@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>测试动画库</title>
+    <style type="text/css">
+    .main {
+        padding: 50px;
+        position: relative;
+    }
+    
+    .btn-wrapper {
+        padding: 15px 0;
+    }
+    
+    .mydiv {
+        margin: 20px 0;
+        width: 300px;
+        height: 200px;
+        background-color: pink;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="mydiv" id="mydiv"></div>
+        <div id="btn-wrapper">
+            <button id="chainBtn">链式调用</button>
+        </div>
+        <div class="mydiv" id="mydiv-reverse"></div>
+        <div id="btn-wrapper">
+            <button id="reverseBtn">reverse调用</button>
+        </div>
+        <div class="mydiv" id="mydiv-predefine1"></div>
+        <div class="mydiv" id="mydiv-predefine2"></div>
+        <div id="btn-wrapper">
+            <button id="predefineBtn">预定义动画队列</button>
+        </div>
+        <div class="mydiv" id="mydiv-effect"></div>
+        <div id="btn-wrapper">
+            <button id="effectBtn">预定义动画</button>
+        </div>
+    </div>
+    <script src="./util.js"></script>
+    <script src="./tween.js"></script>
+    <script src="./myanimate.js"></script>
+    <script src="./myanimate.effect.js"></script>
+    <script type="text/javascript">
+    // 链式调用
+    document.querySelector('#chainBtn').addEventListener('click', function(e) {
+        var div = document.getElementById('mydiv');
+        var anim = Object.create(Animate);
+        anim.init(div);
+        anim.animate({
+            opacity: 0.2
+        }).animate({
+            left: 200
+        });
+        //测试停止动画，stop函数
+        // setTimeout(function() {
+        //     anim.stop();
+        // }, 500);
+        //测试直接到达动画的最终状态，finish函数
+        //如果是链式调用，到达所有动画的最终状态
+        //如果只想到达当前动画的最终状态，只需要稍微修改，在stop中重置toEnd=false即可
+        // setTimeout(function() {
+        //     anim.finish();
+        // }, 500);
+    });
+
+    //reverse调用
+    document.querySelector('#reverseBtn').addEventListener('click', function(e) {
+        var div = document.getElementById('mydiv-reverse');
+        var anim = Object.create(Animate);
+        anim.init(div);
+        anim.animate({
+            left: 200
+        }).reverse();
+    });
+
+    //预定义动画测试
+    document.querySelector('#predefineBtn').addEventListener('click', function(e) {
+        var anims = [{
+            e: '#mydiv-predefine1',
+            p: {
+                left: 300
+            },
+            o: {
+                duration: 500
+            }
+        }, {
+            e: '#mydiv-predefine2',
+            p: {
+                left: 200,
+                opacity: 0.3
+            },
+            o: {
+                duration: 1000
+            }
+        }];
+        //不需要新建一个实例，直接在Animate上调用即可
+        Animate.runsequence(anims);
+    });
+    //预定义动画测试
+    document.querySelector('#effectBtn').addEventListener('click', function(e) {
+        var anim = Object.create(Animate);
+        anim.init('#mydiv-effect');
+        anim.runEffect('test');
+    });
+    </script>
+</body>
+
+</html>
